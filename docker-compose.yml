@@ -1,0 +1,93 @@
+version: "3.8"
+
+services:
+  mcp-screenshot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: digitaldefiance/mcp-screenshot:latest
+    container_name: mcp-screenshot
+    restart: unless-stopped
+
+    # Environment variables
+    environment:
+      - NODE_ENV=production
+      - DISPLAY=:99
+      - TESSDATA_PREFIX=/usr/share/tessdata
+      # Optional: Enable VNC for debugging
+      - ENABLE_VNC=false
+
+    # Volumes for persistent storage
+    volumes:
+      # Screenshot output directory
+      - ./screenshots:/app/screenshots
+      # Optional: Custom configuration
+      - ./config.json:/app/config.json:ro
+
+    # Ports
+    ports:
+      # VNC port (only if ENABLE_VNC=true)
+      - "5900:5900"
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2G
+        reservations:
+          cpus: "0.5"
+          memory: 512M
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+
+    # Read-only root filesystem (except for necessary writable paths)
+    read_only: false
+
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: Development service with hot reload
+  mcp-screenshot-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    image: digitaldefiance/mcp-screenshot:dev
+    container_name: mcp-screenshot-dev
+
+    environment:
+      - NODE_ENV=development
+      - DISPLAY=:99
+      - ENABLE_VNC=true
+
+    volumes:
+      - ./src:/app/src
+      - ./screenshots:/app/screenshots
+      - ./config.json:/app/config.json:ro
+
+    ports:
+      - "5900:5900"
+
+    command: npm run watch
+
+    profiles:
+      - dev
+
+networks:
+  default:
+    name: mcp-screenshot-network
