@@ -2,6 +2,12 @@
 
 Enterprise-grade MCP server providing screenshot capture capabilities for AI agents through the Model Context Protocol (MCP).
 
+## 🔗 Repository
+
+This package is now maintained in its own repository: **[https://github.com/Digital-Defiance/mcp-screenshot](https://github.com/Digital-Defiance/mcp-screenshot)**
+
+This repository is part of the [https://github.com/Digital-Defiance/ai-capabilitites-suite](AI Capabilitites Suite) on GitHub.
+
 ## Features
 
 - **Multi-format Support**: PNG, JPEG, WebP, BMP with configurable quality
