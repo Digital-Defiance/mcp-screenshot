@@ -1,9 +1,9 @@
-# MCP Screenshot v0.0.3 Release Checklist
+# MCP Screenshot v1.0.0 Release Checklist
 
 ## Pre-Release
 
-- [x] Version bumped to 0.0.3 in package.json
-- [x] All version references synced (run `node scripts/sync-versions.js screenshot`)
+- [x] Version bumped to 1.0.0 in package.json
+- [x] All version references synced (run `npm run sync-versions -- screenshot` or `npx ts-node scripts/sync-versions.ts screenshot`)
 - [x] All tests passing (252 tests)
 - [x] VSCode extension tests passing (34 tests)
 - [x] Code built successfully
@@ -47,22 +47,23 @@ npm run publish
 ```bash
 # From repo root
 git add -A
-git commit -m "Release mcp-screenshot v0.0.3"
-git tag mcp-screenshot-v0.0.3
+git commit -m "Release mcp-screenshot v1.0.0"
+git tag mcp-screenshot-v1.0.0
 git push origin main
-git push origin mcp-screenshot-v0.0.3
+git push origin mcp-screenshot-v1.0.0
 ```
 
 Then create GitHub release:
+
 1. Go to https://github.com/digital-defiance/ai-capabilities-suite/releases/new
-2. Tag: `mcp-screenshot-v0.0.3`
-3. Title: `MCP Screenshot v0.0.3`
+2. Tag: `mcp-screenshot-v1.0.0`
+3. Title: `MCP Screenshot v1.0.0`
 4. Description: Use release notes template below
 
 ## Release Notes Template
 
 ```markdown
-# MCP Screenshot v0.0.3
+# MCP Screenshot v1.0.0
 
 ## 🎉 What's New
 
@@ -80,16 +81,20 @@ Then create GitHub release:
 ## 📦 Installation
 
 ### NPM
+
 ```bash
-npm install -g @ai-capabilities-suite/mcp-screenshot@0.0.3
+npm install -g @ai-capabilities-suite/mcp-screenshot@1.0.0
+```
 ```
 
 ### Docker
+
 ```bash
-docker pull digidefiance/mcp-screenshot:0.0.3
+docker pull digidefiance/mcp-screenshot:1.0.0
 ```
 
 ### VSCode Extension
+
 Search "MCP Screenshot" in VS Code Extensions
 
 ## 🔗 Links
@@ -102,14 +107,16 @@ Search "MCP Screenshot" in VS Code Extensions
 ## 📝 Full Changelog
 
 **Fixed:**
+
 - VSCode extension configuration tests now properly re-fetch config after updates
 - Version sync script now updates all screenshot package files
 
 **Improved:**
+
 - Docker MCP Registry submission files with correct image names
 - Version management automation
 
-**Full Changelog**: https://github.com/digital-defiance/ai-capabilities-suite/compare/mcp-screenshot-v0.0.2...mcp-screenshot-v0.0.3
+**Full Changelog**: https://github.com/digital-defiance/ai-capabilities-suite/compare/mcp-screenshot-v0.0.2...mcp-screenshot-v1.0.0
 ```
 
 ## Post-Release
@@ -154,36 +161,40 @@ npm run compile && npm run package && npm run publish
 # 5. Tag and push
 cd ../..
 git add -A
-git commit -m "Release mcp-screenshot v0.0.3"
-git tag mcp-screenshot-v0.0.3
+git commit -m "Release mcp-screenshot v1.0.0"
+git tag mcp-screenshot-v1.0.0
 git push origin main
-git push origin mcp-screenshot-v0.0.3
+git push origin mcp-screenshot-v1.0.0
 ```
 
 ## Troubleshooting
 
 ### NPM Publish Fails
+
 - Ensure you're logged in: `npm login`
 - Check version doesn't already exist
 - Verify package.json version is correct
 
 ### Docker Push Fails
+
 - Ensure you're logged in: `docker login`
 - Check Docker Hub credentials
 - Verify image name is correct
 
 ### VSCode Publish Fails
+
 - Ensure you're logged in: `vsce login DigitalDefiance`
 - Check Personal Access Token is valid
 - Verify extension version is incremented
 
 ### Git Push Fails
+
 - Ensure you have push permissions
 - Check if tag already exists: `git tag -l`
-- Delete existing tag if needed: `git tag -d mcp-screenshot-v0.0.3`
+- Delete existing tag if needed: `git tag -d mcp-screenshot-v1.0.0`
 
 ## Version History
 
-- **v0.0.3** - Current release
+- **v1.0.0** - Current release
 - **v0.0.2** - Initial production release
 - **v0.0.1** - Beta release
