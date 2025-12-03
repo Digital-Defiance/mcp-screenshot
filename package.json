@@ -1,6 +1,6 @@
 {
   "name": "@ai-capabilities-suite/mcp-screenshot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "mcpName": "io.github.DigitalDefiance/mcp-screenshot",
   "description": "MCP server providing screenshot capture capabilities for AI agents with multi-format support, PII masking, and security controls",
   "main": "./dist/src/index.js",
@@ -74,7 +74,8 @@
     "test:e2e": "jest --testPathPattern=e2e.spec.ts",
     "test:unit": "jest --testPathIgnorePatterns=e2e.spec.ts",
     "start": "node dist/src/index.js",
-    "prepublishOnly": "npm run build && npm run test:unit"
+    "prepublishOnly": "npm run build && npm run test:unit",
+    "publish": "npm publish --access public"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.23.0",
