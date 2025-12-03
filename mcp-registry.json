@@ -2,7 +2,7 @@
   "name": "mcp-screenshot",
   "displayName": "MCP Screenshot Server",
   "description": "Cross-platform screenshot capture server for AI agents with multi-format support, PII masking, and security controls",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "Digital Defiance",
     "email": "info@digitaldefiance.org",
