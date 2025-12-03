@@ -31,25 +31,28 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y xvfb
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Lint
-        run: npm run lint
+        run: yarn lint
         continue-on-error: true
 
       - name: Build
-        run: npm run build
+        run: yarn build
 
       - name: Test (Linux with Xvfb)
         if: matrix.os == 'ubuntu-latest'
-        run: xvfb-run -a npm test
+        run: xvfb-run -a yarn test
         env:
           CI: true
 
       - name: Test (Windows/macOS)
         if: matrix.os != 'ubuntu-latest'
-        run: npm test
+        run: yarn test
         env:
           CI: true
 
@@ -75,11 +78,14 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Build
-        run: npm run build
+        run: yarn build
 
       - name: Check for build artifacts
         run: |
