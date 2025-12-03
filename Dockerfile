@@ -1,48 +1,17 @@
-# Multi-stage build for MCP Screenshot Server
-# Optimized for production deployment with minimal image size
+# Dockerfile for MCP Screenshot Server
+# Installs the published NPM package
 
-# Stage 1: Builder
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
-# Install build dependencies
+# Install build dependencies and runtime dependencies
 RUN apk add --no-cache \
+    # Build tools for native modules
     python3 \
     py3-setuptools \
     make \
     g++ \
-    cairo-dev \
-    jpeg-dev \
-    pango-dev \
-    giflib-dev \
-    pixman-dev
-
-WORKDIR /app
-
-# Copy package files
-COPY packages/mcp-screenshot/package*.json ./
-COPY packages/mcp-screenshot/tsconfig.json ./
-COPY tsconfig.base.json /tsconfig.base.json
-COPY packages/mcp-screenshot/tsconfig.lib.json ./tsconfig.lib.json
-COPY packages/mcp-screenshot/tsconfig.spec.json ./tsconfig.spec.json
-
-# Install ALL dependencies (including dev for building)
-RUN npm install && \
-    npm cache clean --force
-
-# Copy source code
-COPY packages/mcp-screenshot/src ./src
-
-# Build TypeScript using project references
-RUN npx tsc -b tsconfig.lib.json && ls -la && ls -la dist
-
-# Remove dev dependencies after build
-RUN npm prune --omit=dev
-
-# Stage 2: Runtime
-FROM node:20-alpine
-
-# Install runtime dependencies for screenshot capture
-RUN apk add --no-cache \
+    # Runtime dependencies
+    tini \
     # X11 and display server
     xvfb \
     x11vnc \
@@ -64,42 +33,54 @@ RUN apk add --no-cache \
     dbus \
     && rm -rf /var/cache/apk/*
 
-# Create app user
-RUN addgroup -g 1001 -S mcpuser && \
-    adduser -u 1001 -S mcpuser -G mcpuser
+# Create non-root user for security
+RUN addgroup -g 1001 -S mcp && \
+    adduser -u 1001 -S mcp -G mcp
 
+# Set working directory
 WORKDIR /app
 
-# Copy built application from builder
-COPY --from=builder --chown=mcpuser:mcpuser /app/dist ./dist
-COPY --from=builder --chown=mcpuser:mcpuser /app/node_modules ./node_modules
-COPY --from=builder --chown=mcpuser:mcpuser /app/package.json ./
+# Install the published package from NPM
+RUN npm install -g @ai-capabilities-suite/mcp-screenshot@1.0.1
 
 # Copy Tesseract data
-COPY --chown=mcpuser:mcpuser packages/mcp-screenshot/eng.traineddata /usr/share/tessdata/
+COPY --chown=mcp:mcp eng.traineddata /usr/share/tessdata/
 
 # Create directories for screenshots
 RUN mkdir -p /app/screenshots /tmp/.X11-unix && \
-    chown -R mcpuser:mcpuser /app/screenshots /tmp/.X11-unix
+    chown -R mcp:mcp /app/screenshots /tmp/.X11-unix
 
-# Environment variables
+# Copy entrypoint script
+COPY --chown=mcp:mcp docker-entrypoint.sh /app/
+RUN chmod +x /app/docker-entrypoint.sh
+
+# Set environment variables
 ENV NODE_ENV=production \
     DISPLAY=:99 \
-    TESSDATA_PREFIX=/usr/share/tessdata
+    TESSDATA_PREFIX=/usr/share/tessdata \
+    LOG_LEVEL=info
 
 # Expose port for VNC (optional, for debugging)
 EXPOSE 5900
 
+# Switch to non-root user
+USER mcp
+
+# Use tini as init system for proper signal handling
+ENTRYPOINT ["/sbin/tini", "--", "/app/docker-entrypoint.sh"]
+
+# Run the MCP server
+CMD ["mcp-screenshot-server"]
+
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD node -e "console.log('healthy')" || exit 1
+    CMD node -e "process.exit(0)" || exit 1
 
-# Switch to non-root user
-USER mcpuser
-
-# Start script that launches Xvfb and the MCP server
-COPY --chown=mcpuser:mcpuser packages/mcp-screenshot/docker-entrypoint.sh /app/
-RUN chmod +x /app/docker-entrypoint.sh
-
-ENTRYPOINT ["/app/docker-entrypoint.sh"]
-CMD ["node", "dist/cli.js"]
+# Labels for metadata
+LABEL org.opencontainers.image.title="MCP Screenshot Server" \
+      org.opencontainers.image.description="Enterprise-grade MCP server for screenshot capture and processing" \
+      org.opencontainers.image.vendor="DigiDefiance" \
+      org.opencontainers.image.authors="Jessica Mulein <jessica@digitaldefiance.org>" \
+      org.opencontainers.image.url="https://github.com/digital-defiance/ai-capabilities-suite" \
+      org.opencontainers.image.source="https://github.com/digital-defiance/ai-capabilities-suite" \
+      org.opencontainers.image.licenses="MIT"
