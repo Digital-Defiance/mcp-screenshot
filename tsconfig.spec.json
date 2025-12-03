@@ -1,8 +1,12 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "./out-tsc/jest",
+    "moduleResolution": "node",
+    "strict": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
     "types": [
       "jest",
       "node"

@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "src",
@@ -16,13 +16,27 @@
     "paths": {}
   },
   "include": [
-    "src/**/*.ts"
+    "src/index.ts",
+    "src/cli.ts",
+    "src/server.ts",
+    "src/types/*.ts",
+    "src/interfaces/*.ts",
+    "src/errors/*.ts",
+    "src/capture/*.ts",
+    "src/processing/*.ts",
+    "src/privacy/*.ts",
+    "src/security/*.ts",
+    "src/storage/*.ts",
+    "src/tools/*.ts"
   ],
   "references": [],
   "exclude": [
     "jest.config.ts",
     "jest.config.js",
-    "src/**/*.spec.ts",
-    "src/**/*.test.ts"
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/*.e2e.spec.ts",
+    "**/*.integration.spec.ts",
+    "**/*.property.spec.ts"
   ]
 }

@@ -5,6 +5,9 @@
 import { DisplayInfo, RegionInfo } from "../types";
 import { InvalidRegionError } from "../errors";
 
+// Re-export InvalidRegionError for convenience
+export { InvalidRegionError };
+
 /**
  * Result of region validation with clipping information
  */

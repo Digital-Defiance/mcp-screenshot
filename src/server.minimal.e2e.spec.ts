@@ -14,27 +14,93 @@ describe("MCP Screenshot Server - Minimal E2E", () => {
     return new Promise((resolve, reject) => {
       const fs = require("fs");
 
+      // Function to recursively search for CLI file
+      function findCliFile(dir: string, maxDepth: number = 3): string | null {
+        if (maxDepth <= 0) return null;
+        
+        const cliPath = path.join(dir, "dist/cli.js");
+        if (fs.existsSync(cliPath)) {
+          // Verify this is the screenshot CLI by checking package.json
+          try {
+            const packagePath = path.join(dir, "package.json");
+            if (fs.existsSync(packagePath)) {
+              const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+              if (pkg.name === '@ai-capabilities-suite/mcp-screenshot') {
+                return cliPath;
+              }
+            }
+          } catch (e) {
+            // If we can't verify, still return it as fallback
+            return cliPath;
+          }
+        }
+        
+        try {
+          const entries = fs.readdirSync(dir, { withFileTypes: true });
+          for (const entry of entries) {
+            if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
+              const found = findCliFile(path.join(dir, entry.name), maxDepth - 1);
+              if (found) return found;
+            }
+          }
+        } catch (e) {
+          // Ignore permission errors
+        }
+        
+        return null;
+      }
+
       // Try multiple possible paths for the CLI
       const possiblePaths = [
-        path.join(__dirname, "../../dist/src/cli.js"),
-        path.join(__dirname, "../dist/src/cli.js"),
-        path.join(process.cwd(), "dist/src/cli.js"),
+        path.join(__dirname, "../../dist/cli.js"),
+        path.join(__dirname, "../dist/cli.js"),
+        path.join(process.cwd(), "dist/cli.js"),
       ];
 
       let serverPath: string | undefined;
+      
+      // First try direct paths
       for (const p of possiblePaths) {
         if (fs.existsSync(p)) {
           serverPath = p;
           break;
         }
       }
+      
+      // If not found, search recursively from current directory and parent directories
+      if (!serverPath) {
+        const searchDirs = [process.cwd(), path.dirname(process.cwd()), path.dirname(path.dirname(process.cwd()))];
+        for (const dir of searchDirs) {
+          serverPath = findCliFile(dir) || undefined;
+          if (serverPath) break;
+        }
+      }
 
       if (!serverPath) {
+        // Debug info for CI
+        console.log("Debug info for CI:");
+        console.log("Current working directory:", process.cwd());
+        console.log("__dirname:", __dirname);
+        console.log("Tried paths:", possiblePaths);
+        
+        // List directory contents to debug
+        try {
+          console.log("Contents of current directory:", fs.readdirSync(process.cwd()));
+          if (fs.existsSync('dist')) {
+            console.log("Contents of dist:", fs.readdirSync('dist'));
+            if (fs.existsSync('dist/src')) {
+              console.log("Contents of dist/src:", fs.readdirSync('dist/src'));
+            }
+          }
+        } catch (e) {
+          console.log("Error listing directories:", e.message);
+        }
+        
         reject(
           new Error(
             `Server not found. Tried: ${possiblePaths.join(
               ", "
-            )}. Run 'npm run build' first.`
+            )} and searched recursively from ${process.cwd()}. Run 'npm run build' first.`
           )
         );
         return;
@@ -139,8 +205,7 @@ describe("MCP Screenshot Server - Minimal E2E", () => {
         {
           name: "screenshot_capture_full",
           arguments: {},
-        },
-        5000
+        }
       );
       const textContent = result.content.find((c: any) => c.type === "text");
       const response = JSON.parse(textContent.text);
