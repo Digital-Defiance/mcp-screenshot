@@ -84,7 +84,10 @@ export class ImageProcessor implements IImageProcessor {
           // BMP is uncompressed format
           // Sharp doesn't have native BMP output, so we use raw format
           // and construct BMP header manually
+          // Ensure we have RGB data (3 channels)
           const rawData = await image
+            .ensureAlpha()
+            .removeAlpha()
             .raw()
             .toBuffer({ resolveWithObject: true });
           return this.createBMPBuffer(rawData);

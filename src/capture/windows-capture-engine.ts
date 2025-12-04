@@ -33,6 +33,12 @@ export class WindowsCaptureEngine extends BaseCaptureEngine {
       }
 
       const buffer = await screenshot.default(options);
+      if (!buffer || buffer.length === 0) {
+        throw new CaptureFailedError(
+          "Screenshot capture returned empty buffer (headless environment?)",
+          { displayId }
+        );
+      }
       return buffer;
     } catch (error) {
       throw new CaptureFailedError(
@@ -94,7 +100,9 @@ export class WindowsCaptureEngine extends BaseCaptureEngine {
         }
       );
 
-      return Buffer.from(stdout.trim(), "base64");
+      const buffer = Buffer.from(stdout.trim(), "base64");
+      if (!buffer || buffer.length === 0) throw new CaptureFailedError("Empty buffer from PowerShell", {});
+      return buffer;
     } catch (error) {
       throw new WindowNotFoundError(
         `Window ${windowId} not found or not capturable`,
@@ -127,14 +135,29 @@ export class WindowsCaptureEngine extends BaseCaptureEngine {
         [Convert]::ToBase64String($ms.ToArray())
       `;
 
-      const { stdout } = await execAsync(
+      const { stdout, stderr } = await execAsync(
         `powershell -Command "${script.replace(/"/g, '\\"')}"`,
         {
           maxBuffer: 50 * 1024 * 1024,
         }
       );
 
-      return Buffer.from(stdout.trim(), "base64");
+      const output = stdout.trim();
+      if (!output || output.length === 0) {
+        throw new CaptureFailedError(
+          `PowerShell returned empty output (headless CI?). stderr: ${stderr}`,
+          { x, y, width, height }
+        );
+      }
+      
+      const buffer = Buffer.from(output, "base64");
+      if (!buffer || buffer.length === 0) {
+        throw new CaptureFailedError(
+          "Failed to decode base64 from PowerShell",
+          { x, y, width, height, outputLength: output.length }
+        );
+      }
+      return buffer;
     } catch (error) {
       throw new CaptureFailedError(
         `Failed to capture region: ${(error as Error).message}`,

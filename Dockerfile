@@ -41,7 +41,7 @@ RUN addgroup -g 1001 -S mcp && \
 WORKDIR /app
 
 # Install the published package from NPM
-RUN npm install -g @ai-capabilities-suite/mcp-screenshot@1.0.1
+RUN npm install -g @ai-capabilities-suite/mcp-screenshot@1.0.2
 
 # Copy Tesseract data
 COPY --chown=mcp:mcp eng.traineddata /usr/share/tessdata/

@@ -80,7 +80,7 @@ describe("Window Capture Integration Tests", () => {
           console.warn("No windows available for testing");
         }
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("command not found")
@@ -137,7 +137,7 @@ describe("Window Capture Integration Tests", () => {
             `(expected ${visibleWindow.bounds.width}x${visibleWindow.bounds.height})`
         );
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("not capturable") ||
@@ -167,7 +167,7 @@ describe("Window Capture Integration Tests", () => {
         expect(foundWindow?.title).toBe(firstWindow.title);
         expect(foundWindow?.processName).toBe(firstWindow.processName);
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("command not found")
@@ -186,7 +186,7 @@ describe("Window Capture Integration Tests", () => {
         );
         expect(nonExistentWindow).toBeNull();
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("command not found")
@@ -241,7 +241,7 @@ describe("Window Capture Integration Tests", () => {
           );
         }
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("command not found")
@@ -260,7 +260,7 @@ describe("Window Capture Integration Tests", () => {
         );
         expect(nonExistentWindow).toBeNull();
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("command not found")
@@ -299,7 +299,7 @@ describe("Window Capture Integration Tests", () => {
           console.warn("No minimized windows found - skipping error test");
         }
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("command not found")
@@ -333,7 +333,7 @@ describe("Window Capture Integration Tests", () => {
           `Window status: ${visibleCount} visible, ${minimizedCount} minimized`
         );
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("command not found")
@@ -417,7 +417,7 @@ describe("Window Capture Integration Tests", () => {
         expect(fs.existsSync(pathWithoutFrame)).toBe(true);
         expect(fs.existsSync(pathWithFrame)).toBe(true);
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("not capturable") ||
@@ -468,7 +468,7 @@ describe("Window Capture Integration Tests", () => {
           console.log(`Saved window capture in ${format}: ${stats.size} bytes`);
         }
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("not capturable") ||
@@ -512,7 +512,7 @@ describe("Window Capture Integration Tests", () => {
           expect(result).toBe(testCase.shouldExclude);
         }
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("command not found")
@@ -599,7 +599,7 @@ describe("Window Capture Integration Tests", () => {
             `(${metadata.width}x${metadata.height}) to ${savePath}`
         );
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("not capturable") ||

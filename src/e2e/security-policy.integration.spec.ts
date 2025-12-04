@@ -499,7 +499,7 @@ describe("Security Policy Integration Tests", () => {
           `Complete security workflow executed successfully: ${stats.size} bytes saved`
         );
       } catch (error) {
-        const errorMessage = (error as Error).message;
+        const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
           errorMessage.includes("command not found")
