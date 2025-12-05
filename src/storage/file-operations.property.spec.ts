@@ -51,14 +51,14 @@ describe("FileOperations Property-Based Tests", () => {
           fc.integer({ min: 0, max: 255 }),
           // Generate arbitrary filename (alphanumeric with extension)
           fc
-            .stringOf(
+            .array(
               fc.constantFrom(
                 ..."abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
               ),
               { minLength: 1, maxLength: 20 }
             )
-            .map((name) => `${name}.png`),
-          async (width, height, r, g, b, filename) => {
+            .map((chars) => `${chars.join('')}.png`),
+          async (width, height, r, g, b, filename: string) => {
             // Create a test image buffer
             const testImageBuffer = await sharp({
               create: {
@@ -115,14 +115,14 @@ describe("FileOperations Property-Based Tests", () => {
           // Generate arbitrary nested directory structure (1-3 levels)
           fc.integer({ min: 1, max: 3 }),
           fc
-            .stringOf(
+            .array(
               fc.constantFrom(
                 ..."abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
               ),
               { minLength: 1, maxLength: 10 }
             )
-            .map((name) => `${name}.png`),
-          async (width, height, depth, filename) => {
+            .map((chars) => `${chars.join('')}.png`),
+          async (width, height, depth, filename: string) => {
             // Create a test image buffer
             const testImageBuffer = await sharp({
               create: {
@@ -189,14 +189,14 @@ describe("FileOperations Property-Based Tests", () => {
           fc.integer({ min: 10, max: 100 }),
           // Generate arbitrary directory name
           fc
-            .stringOf(
+            .array(
               fc.constantFrom(
                 ..."abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
               ),
               { minLength: 1, maxLength: 10 }
             )
-            .map((name) => `secure-${name}`),
-          async (width, height, dirName) => {
+            .map((chars) => `secure-${chars.join('')}`),
+          async (width, height, dirName: string) => {
             // Create a test image buffer
             const testImageBuffer = await sharp({
               create: {
@@ -249,16 +249,16 @@ describe("FileOperations Property-Based Tests", () => {
           fc.integer({ min: 10, max: 100 }),
           // Generate arbitrary filename
           fc
-            .stringOf(
+            .array(
               fc.constantFrom(
                 ..."abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
               ),
               { minLength: 1, maxLength: 10 }
             )
-            .map((name) => `${name}.png`),
+            .map((chars) => `${chars.join('')}.png`),
           // Generate path type (relative or absolute)
           fc.boolean(),
-          async (width, height, filename, useRelative) => {
+          async (width, height, filename: string, useRelative) => {
             // Create a test image buffer
             const testImageBuffer = await sharp({
               create: {
