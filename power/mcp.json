@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "acs-screenshot": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ai-capabilities-suite/mcp-screenshot@latest"
+      ],
+      "env": {}
+    }
+  }
+}
