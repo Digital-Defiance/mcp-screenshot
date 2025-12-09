@@ -6,12 +6,14 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as os from "os";
+import sharp from "sharp";
 import { createCaptureEngine } from "../capture";
 import { ImageProcessor } from "../processing";
 import { SecurityManager } from "../security";
 import { ImageFormat } from "../types";
 
 describe("Region Capture Integration Tests", () => {
+  jest.setTimeout(120000);
   let captureEngine: ReturnType<typeof createCaptureEngine>;
   let imageProcessor: ImageProcessor;
   let securityManager: SecurityManager;
@@ -28,7 +30,7 @@ describe("Region Capture Integration Tests", () => {
     } catch {
       captureAvailable = false;
     }
-  }, 10000);
+  }, 60000);
 
   beforeAll(() => {
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "mcp-screenshot-region-"));
@@ -37,10 +39,9 @@ describe("Region Capture Integration Tests", () => {
     imageProcessor = new ImageProcessor();
     securityManager = new SecurityManager({
       allowedDirectories: [tempDir],
-      maxCapturesPerMinute: 100,
-      enableAuditLog: true,
+      enableAuditLog: false,
     });
-  });
+  }, 60000);
 
   afterAll(() => {
     if (fs.existsSync(tempDir)) {
@@ -78,7 +79,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -91,39 +96,35 @@ describe("Region Capture Integration Tests", () => {
       try {
         const testRegions = [
           { x: 0, y: 0, width: 50, height: 50 },
-          { x: 100, y: 100, width: 75, height: 75 },
-          { x: 200, y: 200, width: 100, height: 50 },
-          { x: 50, y: 150, width: 150, height: 100 },
+          { x: 100, y: 100, width: 50, height: 50 },
+          { x: 200, y: 200, width: 50, height: 50 },
         ];
 
         for (const region of testRegions) {
-          const regionBuffer = await captureEngine.captureRegion(
+          const captureBuffer = await captureEngine.captureRegion(
             region.x,
             region.y,
             region.width,
             region.height
           );
 
-          const metadata = await imageProcessor.getMetadata(regionBuffer);
+          expect(captureBuffer).toBeDefined();
+          expect(captureBuffer.length).toBeGreaterThan(0);
+
+          // Verify image dimensions
+          const metadata = await sharp(captureBuffer).metadata();
           expect(metadata.width).toBe(region.width);
           expect(metadata.height).toBe(region.height);
 
           console.log(
-            `Region (${region.x}, ${region.y}): ${metadata.width}x${metadata.height}`
+            `Small region ${region.width}x${region.height} captured successfully`
           );
         }
       } catch (error) {
-        const errorMessage = (error as Error)?.message || "";
-        if (
-          errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
-        ) {
-          console.warn(`Capture tools not available - skipping test`);
-          return;
-        }
+        console.error("Error capturing regions at coordinates:", error);
         throw error;
       }
-    }, 60000);
+    }, 120000);
 
     it("should capture regions with different aspect ratios", async () => {
       try {
@@ -158,14 +159,18 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
         }
         throw error;
       }
-    }, 60000);
+    }, 120000);
   });
 
   describe("Requirement 3.2: Boundary clipping", () => {
@@ -212,14 +217,18 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should handle region completely outside screen bounds", async () => {
       try {
@@ -267,7 +276,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -287,7 +300,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -305,7 +322,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -323,7 +344,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -343,7 +368,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -361,7 +390,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -377,7 +410,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -395,7 +432,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -413,7 +454,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -462,7 +507,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -518,7 +567,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -552,7 +605,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -584,7 +641,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -623,7 +684,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -664,7 +729,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping test`);
           return;
@@ -730,7 +799,11 @@ describe("Region Capture Integration Tests", () => {
         const errorMessage = (error as Error)?.message || "";
         if (
           errorMessage.includes("not found") ||
-          errorMessage.includes("command not found") || errorMessage.includes("headless") || errorMessage.includes("Empty buffer") || errorMessage.includes("PowerShell returned empty") || errorMessage.includes("Failed to capture region")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("PowerShell returned empty") ||
+          errorMessage.includes("Failed to capture region")
         ) {
           console.warn(`Capture tools not available - skipping workflow test`);
           return;

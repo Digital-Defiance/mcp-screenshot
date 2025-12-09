@@ -32,6 +32,10 @@ export abstract class BaseCaptureEngine implements ICaptureEngine {
     width: number,
     height: number
   ): Promise<Buffer> {
+    // Validate coordinates and dimensions first to fail fast
+    // This avoids unnecessary calls to getDisplays() if inputs are invalid
+    this.regionValidator.validateCoordinates(x, y, width, height);
+
     // Get displays for boundary validation
     const displays = await this.getDisplays();
 

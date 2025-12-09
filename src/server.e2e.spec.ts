@@ -8,6 +8,7 @@ import * as os from "os";
  * Tests the actual MCP protocol communication via stdio
  */
 describe("MCP Screenshot Server - E2E", () => {
+  jest.setTimeout(120000);
   let serverProcess: ChildProcess;
   let messageId = 0;
   let tempDir: string;
@@ -57,15 +58,15 @@ describe("MCP Screenshot Server - E2E", () => {
       // Function to recursively search for CLI file
       function findCliFile(dir: string, maxDepth: number = 3): string | null {
         if (maxDepth <= 0) return null;
-        
+
         const cliPath = path.join(dir, "dist/cli.js");
         if (fs.existsSync(cliPath)) {
           // Verify this is the screenshot CLI by checking package.json
           try {
             const packagePath = path.join(dir, "package.json");
             if (fs.existsSync(packagePath)) {
-              const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
-              if (pkg.name === '@ai-capabilities-suite/mcp-screenshot') {
+              const pkg = JSON.parse(fs.readFileSync(packagePath, "utf8"));
+              if (pkg.name === "@ai-capabilities-suite/mcp-screenshot") {
                 return cliPath;
               }
             }
@@ -74,19 +75,26 @@ describe("MCP Screenshot Server - E2E", () => {
             return cliPath;
           }
         }
-        
+
         try {
           const entries = fs.readdirSync(dir, { withFileTypes: true });
           for (const entry of entries) {
-            if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
-              const found = findCliFile(path.join(dir, entry.name), maxDepth - 1);
+            if (
+              entry.isDirectory() &&
+              !entry.name.startsWith(".") &&
+              entry.name !== "node_modules"
+            ) {
+              const found = findCliFile(
+                path.join(dir, entry.name),
+                maxDepth - 1
+              );
               if (found) return found;
             }
           }
         } catch (e) {
           // Ignore permission errors
         }
-        
+
         return null;
       }
 
@@ -98,7 +106,7 @@ describe("MCP Screenshot Server - E2E", () => {
       ];
 
       let serverPath: string | undefined;
-      
+
       // First try direct paths
       for (const p of possiblePaths) {
         if (fs.existsSync(p)) {
@@ -106,10 +114,14 @@ describe("MCP Screenshot Server - E2E", () => {
           break;
         }
       }
-      
+
       // If not found, search recursively from current directory and parent directories
       if (!serverPath) {
-        const searchDirs = [process.cwd(), path.dirname(process.cwd()), path.dirname(path.dirname(process.cwd()))];
+        const searchDirs = [
+          process.cwd(),
+          path.dirname(process.cwd()),
+          path.dirname(path.dirname(process.cwd())),
+        ];
         for (const dir of searchDirs) {
           serverPath = findCliFile(dir) || undefined;
           if (serverPath) break;
@@ -122,20 +134,23 @@ describe("MCP Screenshot Server - E2E", () => {
         console.log("Current working directory:", process.cwd());
         console.log("__dirname:", __dirname);
         console.log("Tried paths:", possiblePaths);
-        
+
         // List directory contents to debug
         try {
-          console.log("Contents of current directory:", fs.readdirSync(process.cwd()));
-          if (fs.existsSync('dist')) {
-            console.log("Contents of dist:", fs.readdirSync('dist'));
-            if (fs.existsSync('dist/src')) {
-              console.log("Contents of dist/src:", fs.readdirSync('dist/src'));
+          console.log(
+            "Contents of current directory:",
+            fs.readdirSync(process.cwd())
+          );
+          if (fs.existsSync("dist")) {
+            console.log("Contents of dist:", fs.readdirSync("dist"));
+            if (fs.existsSync("dist/src")) {
+              console.log("Contents of dist/src:", fs.readdirSync("dist/src"));
             }
           }
         } catch (e) {
           console.log("Error listing directories:", e.message);
         }
-        
+
         reject(
           new Error(
             `Server not found. Tried: ${possiblePaths.join(
@@ -443,8 +458,10 @@ describe("MCP Screenshot Server - E2E", () => {
         expect(response.data).toBeDefined();
         expect(typeof response.data).toBe("string");
         expect(response.data.length).toBeGreaterThan(0);
-        if (response.width !== undefined) expect(response.width).toBeGreaterThan(0);
-        if (response.height !== undefined) expect(response.height).toBeGreaterThan(0);
+        if (response.width !== undefined)
+          expect(response.width).toBeGreaterThan(0);
+        if (response.height !== undefined)
+          expect(response.height).toBeGreaterThan(0);
       } else {
         expect(response.status).toBe("error");
         expect(response.error.code).toMatch(/CAPTURE_FAILED|ENCODING_FAILED/);
@@ -521,7 +538,8 @@ describe("MCP Screenshot Server - E2E", () => {
 
       if (response.status === "success") {
         expect(response.data).toBeDefined();
-        if (response.piiMasked !== undefined) expect(response.piiMasked).toBe(true);
+        if (response.piiMasked !== undefined)
+          expect(response.piiMasked).toBe(true);
       } else {
         expect(response.status).toBe("error");
         expect(response.error.code).toMatch(/CAPTURE_FAILED|ENCODING_FAILED/);
@@ -538,16 +556,20 @@ describe("MCP Screenshot Server - E2E", () => {
         console.warn("Skipping region capture - tools not available");
         return;
       }
-      
-      const result = await sendRequest("tools/call", {
-        name: "screenshot_capture_region",
-        arguments: {
-          x: 0,
-          y: 0,
-          width: 100,
-          height: 100,
+
+      const result = await sendRequest(
+        "tools/call",
+        {
+          name: "screenshot_capture_region",
+          arguments: {
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100,
+          },
         },
-      }, 30000);
+        30000
+      );
 
       const textContent = result.content.find((c: any) => c.type === "text");
       const response = JSON.parse(textContent.text);
@@ -566,15 +588,19 @@ describe("MCP Screenshot Server - E2E", () => {
     }, 45000);
 
     it("should validate region boundaries", async () => {
-      const result = await sendRequest("tools/call", {
-        name: "screenshot_capture_region",
-        arguments: {
-          x: -10,
-          y: -10,
-          width: 100,
-          height: 100,
+      const result = await sendRequest(
+        "tools/call",
+        {
+          name: "screenshot_capture_region",
+          arguments: {
+            x: -10,
+            y: -10,
+            width: 100,
+            height: 100,
+          },
         },
-      }, 30000);
+        30000
+      );
 
       const textContent = result.content.find((c: any) => c.type === "text");
       const response = JSON.parse(textContent.text);
@@ -594,19 +620,23 @@ describe("MCP Screenshot Server - E2E", () => {
         console.warn("Skipping region save - tools not available");
         return;
       }
-      
+
       const savePath = path.join(tempDir, "region.png");
 
-      const result = await sendRequest("tools/call", {
-        name: "screenshot_capture_region",
-        arguments: {
-          x: 0,
-          y: 0,
-          width: 200,
-          height: 200,
-          savePath,
+      const result = await sendRequest(
+        "tools/call",
+        {
+          name: "screenshot_capture_region",
+          arguments: {
+            x: 0,
+            y: 0,
+            width: 200,
+            height: 200,
+            savePath,
+          },
         },
-      }, 30000);
+        30000
+      );
 
       const textContent = result.content.find((c: any) => c.type === "text");
       const response = JSON.parse(textContent.text);
@@ -705,10 +735,14 @@ describe("MCP Screenshot Server - E2E", () => {
 
   describe("Error Handling", () => {
     it("should handle unknown tool", async () => {
-      const result = await sendRequest("tools/call", {
-        name: "screenshot_unknown_tool",
-        arguments: {},
-      }, 10000);
+      const result = await sendRequest(
+        "tools/call",
+        {
+          name: "screenshot_unknown_tool",
+          arguments: {},
+        },
+        10000
+      );
 
       expect(result.isError).toBe(true);
       const textContent = result.content.find((c: any) => c.type === "text");
@@ -719,14 +753,18 @@ describe("MCP Screenshot Server - E2E", () => {
     }, 15000);
 
     it("should handle missing required parameters", async () => {
-      const result = await sendRequest("tools/call", {
-        name: "screenshot_capture_region",
-        arguments: {
-          x: 0,
-          y: 0,
-          // Missing width and height
+      const result = await sendRequest(
+        "tools/call",
+        {
+          name: "screenshot_capture_region",
+          arguments: {
+            x: 0,
+            y: 0,
+            // Missing width and height
+          },
         },
-      }, 10000);
+        10000
+      );
 
       const textContent = result.content.find((c: any) => c.type === "text");
       const response = JSON.parse(textContent.text);
@@ -737,12 +775,16 @@ describe("MCP Screenshot Server - E2E", () => {
 
     it("should handle invalid file path", async () => {
       try {
-        const result = await sendRequest("tools/call", {
-          name: "screenshot_capture_full",
-          arguments: {
-            savePath: "/invalid/path/that/does/not/exist/screenshot.png",
+        const result = await sendRequest(
+          "tools/call",
+          {
+            name: "screenshot_capture_full",
+            arguments: {
+              savePath: "/invalid/path/that/does/not/exist/screenshot.png",
+            },
           },
-        }, 15000);
+          15000
+        );
 
         const textContent = result.content.find((c: any) => c.type === "text");
         const response = JSON.parse(textContent.text);
@@ -765,17 +807,21 @@ describe("MCP Screenshot Server - E2E", () => {
         console.warn("Skipping PNG format test - tools not available");
         return;
       }
-      
-      const result = await sendRequest("tools/call", {
-        name: "screenshot_capture_region",
-        arguments: {
-          x: 0,
-          y: 0,
-          width: 50,
-          height: 50,
-          format: "png",
+
+      const result = await sendRequest(
+        "tools/call",
+        {
+          name: "screenshot_capture_region",
+          arguments: {
+            x: 0,
+            y: 0,
+            width: 50,
+            height: 50,
+            format: "png",
+          },
         },
-      }, 30000);
+        30000
+      );
 
       const textContent = result.content.find((c: any) => c.type === "text");
       const response = JSON.parse(textContent.text);
@@ -793,18 +839,22 @@ describe("MCP Screenshot Server - E2E", () => {
         console.warn("Skipping JPEG format test - tools not available");
         return;
       }
-      
-      const result = await sendRequest("tools/call", {
-        name: "screenshot_capture_region",
-        arguments: {
-          x: 0,
-          y: 0,
-          width: 50,
-          height: 50,
-          format: "jpeg",
-          quality: 85,
+
+      const result = await sendRequest(
+        "tools/call",
+        {
+          name: "screenshot_capture_region",
+          arguments: {
+            x: 0,
+            y: 0,
+            width: 50,
+            height: 50,
+            format: "jpeg",
+            quality: 85,
+          },
         },
-      }, 30000);
+        30000
+      );
 
       const textContent = result.content.find((c: any) => c.type === "text");
       const response = JSON.parse(textContent.text);
@@ -822,17 +872,21 @@ describe("MCP Screenshot Server - E2E", () => {
         console.warn("Skipping WebP format test - tools not available");
         return;
       }
-      
-      const result = await sendRequest("tools/call", {
-        name: "screenshot_capture_region",
-        arguments: {
-          x: 0,
-          y: 0,
-          width: 50,
-          height: 50,
-          format: "webp",
+
+      const result = await sendRequest(
+        "tools/call",
+        {
+          name: "screenshot_capture_region",
+          arguments: {
+            x: 0,
+            y: 0,
+            width: 50,
+            height: 50,
+            format: "webp",
+          },
         },
-      }, 30000);
+        30000
+      );
 
       const textContent = result.content.find((c: any) => c.type === "text");
       const response = JSON.parse(textContent.text);
@@ -849,10 +903,14 @@ describe("MCP Screenshot Server - E2E", () => {
   describe("Security and Privacy", () => {
     it("should respect excluded window patterns", async () => {
       try {
-        const result = await sendRequest("tools/call", {
-          name: "screenshot_list_windows",
-          arguments: {},
-        }, 10000);
+        const result = await sendRequest(
+          "tools/call",
+          {
+            name: "screenshot_list_windows",
+            arguments: {},
+          },
+          10000
+        );
 
         const textContent = result.content.find((c: any) => c.type === "text");
         const response = JSON.parse(textContent.text);
@@ -870,12 +928,16 @@ describe("MCP Screenshot Server - E2E", () => {
 
     it("should handle PII masking request or fail gracefully", async () => {
       try {
-        const result = await sendRequest("tools/call", {
-          name: "screenshot_capture_full",
-          arguments: {
-            enablePIIMasking: true,
+        const result = await sendRequest(
+          "tools/call",
+          {
+            name: "screenshot_capture_full",
+            arguments: {
+              enablePIIMasking: true,
+            },
           },
-        }, 30000);
+          30000
+        );
 
         const textContent = result.content.find((c: any) => c.type === "text");
         const response = JSON.parse(textContent.text);
@@ -885,7 +947,9 @@ describe("MCP Screenshot Server - E2E", () => {
         } else {
           expect(response.status).toBe("error");
           expect(response.error.code).toMatch(/CAPTURE_FAILED|ENCODING_FAILED/);
-          console.log("ℹ️  PII masking test failed (expected in headless environment)");
+          console.log(
+            "ℹ️  PII masking test failed (expected in headless environment)"
+          );
         }
       } catch (error) {
         if ((error as Error).message.includes("timeout")) {

@@ -4,7 +4,7 @@ set -e
 # Docker Build and Push Script for MCP Screenshot
 # This script builds and pushes the MCP Screenshot Server Docker image
 
-VERSION="1.0.6"
+VERSION="1.0.7"
 IMAGE_NAME="digitaldefiance/mcp-screenshot"
 
 echo "🐳 Building Docker image for MCP Screenshot..."

@@ -28,7 +28,7 @@ __metadata:
     typescript: "npm:^5.3.3"
     zod: "npm:^4.1.13"
   bin:
-    mcp-screenshot: ./dist/src/cli.js
+    mcp-screenshot: ./dist/cli.js
   languageName: unknown
   linkType: soft
 
@@ -1331,20 +1331,20 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 24.10.1
-  resolution: "@types/node@npm:24.10.1"
+  version: 24.10.2
+  resolution: "@types/node@npm:24.10.2"
   dependencies:
     undici-types: "npm:~7.16.0"
-  checksum: 10c0/d6bca7a78f550fbb376f236f92b405d676003a8a09a1b411f55920ef34286ee3ee51f566203920e835478784df52662b5b2af89159d9d319352e9ea21801c002
+  checksum: 10c0/560c894e1a9bf7468718ceca8cd520361fd0d3fcc0b020c2f028fc722b28b5b56aecd16736a9b753d52a14837c066cf23480a8582ead59adc63a7e4333bc976c
   languageName: node
   linkType: hard
 
 "@types/node@npm:^20.10.6":
-  version: 20.19.25
-  resolution: "@types/node@npm:20.19.25"
+  version: 20.19.26
+  resolution: "@types/node@npm:20.19.26"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/992f18cb03264e8dc2fd3cb64f428ee4997cb6d928dad68bf4b752eacac73062697ce7ce6a0e71a6d15af510814397a20597a72332dfec638e02fb3a382ad014
+  checksum: 10c0/68e7d92dd2b7bddff9dffabb9c740e655906ceac428dcf070915cdcae720579e4d72261c55ed7eccbfa907a75cbb1ff3a9148ea49878a07a72d5dd6c9e06d9d7
   languageName: node
   linkType: hard
 
@@ -1667,11 +1667,11 @@ __metadata:
   linkType: hard
 
 "baseline-browser-mapping@npm:^2.9.0":
-  version: 2.9.2
-  resolution: "baseline-browser-mapping@npm:2.9.2"
+  version: 2.9.5
+  resolution: "baseline-browser-mapping@npm:2.9.5"
   bin:
     baseline-browser-mapping: dist/cli.js
-  checksum: 10c0/4f9be09e20261ed26f19e9b95454dcb8d8371b87983c57cd9f70b9572e9b3053577f0d8d6d91297bdb605337747680686e22f62522a6e57ae2488fcacf641188
+  checksum: 10c0/581bd4f578a1b5ccd48ad0155f760c412803f02e97259deec99150b87c95766266b607b09aefa65da96dc5b925165706d675f10413630e767391e26a4f7afcdf
   languageName: node
   linkType: hard
 
@@ -1861,9 +1861,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001759":
-  version: 1.0.30001759
-  resolution: "caniuse-lite@npm:1.0.30001759"
-  checksum: 10c0/b0f415960ba34995cda18e0d25c4e602f6917b9179290a76bdd0311423505b78cc93e558a90c98a22a1cc6b1781ab720ef6beea24ec7e29a1c1164ca72eac3a2
+  version: 1.0.30001760
+  resolution: "caniuse-lite@npm:1.0.30001760"
+  checksum: 10c0/cee26dff5c5b15ba073ab230200e43c0d4e88dc3bac0afe0c9ab963df70aaa876c3e513dde42a027f317136bf6e274818d77b073708b74c5807dfad33c029d3c
   languageName: node
   linkType: hard
 
@@ -2161,9 +2161,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.263":
-  version: 1.5.265
-  resolution: "electron-to-chromium@npm:1.5.265"
-  checksum: 10c0/f0409d15b02b61df5004d2bf6db0a2a01f42273fb46944c243d13139c83e8a07ad556656fd5f09758ae9b612ebf9862535afc6bffd47395890d5df7551274a4b
+  version: 1.5.267
+  resolution: "electron-to-chromium@npm:1.5.267"
+  checksum: 10c0/0732bdb891b657f2e43266a3db8cf86fff6cecdcc8d693a92beff214e136cb5c2ee7dc5945ed75fa1db16e16bad0c38695527a020d15f39e79084e0b2e447621
   languageName: node
   linkType: hard
 
@@ -2397,11 +2397,11 @@ __metadata:
   linkType: hard
 
 "fast-check@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "fast-check@npm:4.3.0"
+  version: 4.4.0
+  resolution: "fast-check@npm:4.4.0"
   dependencies:
     pure-rand: "npm:^7.0.0"
-  checksum: 10c0/91d73395d6a7523f94514c9c2bda7452c506e73f9d68e77eb45cc83c525c9cc01c5b4331cc18607219f0327ab2dc83963e45c9216e7fd6d85b49b871b4ea2033
+  checksum: 10c0/8bd1a0c772cde26901f165356f91def147da6eee5c27b392944392ad0cf2412b0aac7dd1614cdc6c6bb58bb5bfed20eb9c3997a8c042162e3f090f6198964974
   languageName: node
   linkType: hard
 

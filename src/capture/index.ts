@@ -10,12 +10,28 @@ export * from "./base-capture-engine";
 export * from "./linux-capture-engine";
 export * from "./macos-capture-engine";
 export * from "./windows-capture-engine";
+export * from "./wsl-capture-engine";
 export * from "./region-validator";
 
+import * as fs from "fs";
 import { BaseCaptureEngine } from "./base-capture-engine";
 import { LinuxCaptureEngine } from "./linux-capture-engine";
 import { MacOSCaptureEngine } from "./macos-capture-engine";
 import { WindowsCaptureEngine } from "./windows-capture-engine";
+import { WSLCaptureEngine } from "./wsl-capture-engine";
+
+/**
+ * Check if running in WSL
+ */
+function isWSL(): boolean {
+  try {
+    if (process.platform !== "linux") return false;
+    const version = fs.readFileSync("/proc/version", "utf8").toLowerCase();
+    return version.includes("microsoft") || version.includes("wsl");
+  } catch {
+    return false;
+  }
+}
 
 /**
  * Create a platform-specific capture engine
@@ -36,7 +52,7 @@ import { WindowsCaptureEngine } from "./windows-capture-engine";
  *
  * @remarks
  * Platform-specific behavior:
- * - **Linux**: Uses X11 (import/xwd) or Wayland (grim) depending on display server
+ * - **Linux**: Uses X11 (import/xwd) or Wayland (grim) depending on display server. Supports WSL via PowerShell.
  * - **macOS**: Uses native screencapture command with Retina display support
  * - **Windows**: Uses screenshot-desktop library with high-DPI support
  */
@@ -45,6 +61,9 @@ export function createCaptureEngine(): BaseCaptureEngine {
 
   switch (platform) {
     case "linux":
+      if (isWSL()) {
+        return new WSLCaptureEngine();
+      }
       return new LinuxCaptureEngine();
     case "darwin":
       return new MacOSCaptureEngine();

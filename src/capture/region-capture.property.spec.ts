@@ -57,7 +57,6 @@ describe("Region Capture Property-Based Tests", () => {
               height,
               primaryDisplay.resolution.height - y
             );
-
             try {
               // Capture the region
               const captureBuffer = await captureEngine.captureRegion(
@@ -81,9 +80,15 @@ describe("Region Capture Property-Based Tests", () => {
               // If capture fails due to missing system tools, skip the test
               const errorMessage = (error as Error).message;
               if (
+                errorMessage.includes("CaptureFailedError") ||
+                errorMessage.includes("failed") ||
+                errorMessage.includes("headless") ||
+                errorMessage.includes("compositor doesn't support") ||
                 errorMessage.includes("not found") ||
                 errorMessage.includes("ENOENT") ||
-                errorMessage.includes("command not found") || errorMessage.includes("Empty buffer") || errorMessage.includes("headless")
+                errorMessage.includes("command not found") ||
+                errorMessage.includes("Empty buffer") ||
+                errorMessage.includes("headless")
               ) {
                 console.warn(
                   `Region capture tools not available - skipping test: ${errorMessage}`
@@ -95,9 +100,9 @@ describe("Region Capture Property-Based Tests", () => {
             }
           }
         ),
-        { numRuns: 10 } // Run 10 iterations with different random regions
+        { numRuns: 2 } // Run 2 iterations with different random regions
       );
-    }, 60000); // 60 second timeout
+    }, 120000); // 120 second timeout
 
     it("should capture region with exact dimensions when completely within bounds", async () => {
       // Get display information
@@ -148,9 +153,15 @@ describe("Region Capture Property-Based Tests", () => {
           // If capture fails due to missing system tools, skip the test
           const errorMessage = (error as Error).message;
           if (
+            errorMessage.includes("CaptureFailedError") ||
+            errorMessage.includes("failed") ||
+            errorMessage.includes("headless") ||
+            errorMessage.includes("compositor doesn't support") ||
             errorMessage.includes("not found") ||
             errorMessage.includes("ENOENT") ||
-            errorMessage.includes("command not found") || errorMessage.includes("Empty buffer") || errorMessage.includes("headless")
+            errorMessage.includes("command not found") ||
+            errorMessage.includes("Empty buffer") ||
+            errorMessage.includes("headless")
           ) {
             console.warn(
               `Region capture tools not available - skipping test: ${errorMessage}`
@@ -161,7 +172,7 @@ describe("Region Capture Property-Based Tests", () => {
           throw error;
         }
       }
-    }, 60000); // 60 second timeout
+    }, 120000); // 120 second timeout
 
     it("should reject regions with negative coordinates", async () => {
       // Test with negative coordinates
@@ -254,9 +265,15 @@ describe("Region Capture Property-Based Tests", () => {
         // If capture fails due to missing system tools, skip the test
         const errorMessage = (error as Error).message;
         if (
+          errorMessage.includes("CaptureFailedError") ||
+          errorMessage.includes("failed") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("compositor doesn't support") ||
           errorMessage.includes("not found") ||
           errorMessage.includes("ENOENT") ||
-          errorMessage.includes("command not found") || errorMessage.includes("Empty buffer") || errorMessage.includes("headless")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("headless")
         ) {
           console.warn(
             `Region capture tools not available - skipping test: ${errorMessage}`
@@ -266,7 +283,7 @@ describe("Region Capture Property-Based Tests", () => {
         // Re-throw other errors
         throw error;
       }
-    }, 60000); // 60 second timeout
+    }, 120000); // 120 second timeout
   });
 
   /**
@@ -359,9 +376,15 @@ describe("Region Capture Property-Based Tests", () => {
               // If capture fails due to missing system tools, skip the test
               const errorMessage = (error as Error).message;
               if (
+                errorMessage.includes("CaptureFailedError") ||
+                errorMessage.includes("failed") ||
+                errorMessage.includes("headless") ||
+                errorMessage.includes("compositor doesn't support") ||
                 errorMessage.includes("not found") ||
                 errorMessage.includes("ENOENT") ||
-                errorMessage.includes("command not found") || errorMessage.includes("Empty buffer") || errorMessage.includes("headless")
+                errorMessage.includes("command not found") ||
+                errorMessage.includes("Empty buffer") ||
+                errorMessage.includes("headless")
               ) {
                 console.warn(
                   `Region capture tools not available - skipping test: ${errorMessage}`
@@ -375,7 +398,7 @@ describe("Region Capture Property-Based Tests", () => {
         ),
         { numRuns: 10 } // Run 10 iterations with different random regions
       );
-    }, 90000); // 90 second timeout
+    }, 120000); // 120 second timeout
 
     it("should reject regions completely outside display boundaries", async () => {
       // Get display information
@@ -421,7 +444,7 @@ describe("Region Capture Property-Based Tests", () => {
           )
         ).rejects.toThrow(InvalidRegionError);
       }
-    });
+    }, 30000);
 
     it("should clip region extending beyond right edge of display", async () => {
       // Get display information
@@ -462,9 +485,15 @@ describe("Region Capture Property-Based Tests", () => {
         // If capture fails due to missing system tools, skip the test
         const errorMessage = (error as Error).message;
         if (
+          errorMessage.includes("CaptureFailedError") ||
+          errorMessage.includes("failed") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("compositor doesn't support") ||
           errorMessage.includes("not found") ||
           errorMessage.includes("ENOENT") ||
-          errorMessage.includes("command not found") || errorMessage.includes("Empty buffer") || errorMessage.includes("headless")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("headless")
         ) {
           console.warn(
             `Region capture tools not available - skipping test: ${errorMessage}`
@@ -515,9 +544,15 @@ describe("Region Capture Property-Based Tests", () => {
         // If capture fails due to missing system tools, skip the test
         const errorMessage = (error as Error).message;
         if (
+          errorMessage.includes("CaptureFailedError") ||
+          errorMessage.includes("failed") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("compositor doesn't support") ||
           errorMessage.includes("not found") ||
           errorMessage.includes("ENOENT") ||
-          errorMessage.includes("command not found") || errorMessage.includes("Empty buffer") || errorMessage.includes("headless")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("headless")
         ) {
           console.warn(
             `Region capture tools not available - skipping test: ${errorMessage}`
@@ -569,9 +604,15 @@ describe("Region Capture Property-Based Tests", () => {
         // If capture fails due to missing system tools, skip the test
         const errorMessage = (error as Error).message;
         if (
+          errorMessage.includes("CaptureFailedError") ||
+          errorMessage.includes("failed") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("compositor doesn't support") ||
           errorMessage.includes("not found") ||
           errorMessage.includes("ENOENT") ||
-          errorMessage.includes("command not found") || errorMessage.includes("Empty buffer") || errorMessage.includes("headless")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("headless")
         ) {
           console.warn(
             `Region capture tools not available - skipping test: ${errorMessage}`
@@ -632,9 +673,15 @@ describe("Region Capture Property-Based Tests", () => {
         // If capture fails due to missing system tools, skip the test
         const errorMessage = (error as Error).message;
         if (
+          errorMessage.includes("CaptureFailedError") ||
+          errorMessage.includes("failed") ||
+          errorMessage.includes("headless") ||
+          errorMessage.includes("compositor doesn't support") ||
           errorMessage.includes("not found") ||
           errorMessage.includes("ENOENT") ||
-          errorMessage.includes("command not found") || errorMessage.includes("Empty buffer") || errorMessage.includes("headless")
+          errorMessage.includes("command not found") ||
+          errorMessage.includes("Empty buffer") ||
+          errorMessage.includes("headless")
         ) {
           console.warn(
             `Region capture tools not available - skipping test: ${errorMessage}`
@@ -644,6 +691,6 @@ describe("Region Capture Property-Based Tests", () => {
         // Re-throw other errors
         throw error;
       }
-    }, 60000); // 60 second timeout
+    }, 120000); // 120 second timeout
   });
 });

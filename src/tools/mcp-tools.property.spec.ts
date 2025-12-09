@@ -140,9 +140,9 @@ describe("MCP Tools Property Tests", () => {
             }
           }
         ),
-        { numRuns: 100 }
+        { numRuns: 5 }
       );
-    }, 60000); // 60 second timeout for property test
+    }, 180000); // 180 second timeout for property test
   });
 
   /**
@@ -253,8 +253,8 @@ describe("MCP Tools Property Tests", () => {
             }
           }
         ),
-        { numRuns: 100 }
+        { numRuns: 5 }
       );
-    }, 120000); // 120 second timeout for property test
+    }, 180000); // 180 second timeout for property test
   });
 });

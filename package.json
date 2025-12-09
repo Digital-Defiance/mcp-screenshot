@@ -1,15 +1,13 @@
 {
   "name": "@ai-capabilities-suite/mcp-screenshot",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "packageManager": "yarn@4.12.0",
   "mcpName": "io.github.Digital-Defiance/mcp-screenshot",
   "description": "MCP server providing screenshot capture capabilities for AI agents with multi-format support, PII masking, and security controls",
   "main": "./dist/src/index.js",
   "module": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
-  "bin": {
-    "mcp-screenshot": "./dist/cli.js"
-  },
+  "bin": "./dist/cli.js",
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -73,6 +71,7 @@
     "build": "tsc --build",
     "lint": "echo 'Linting skipped for mcp-screenshot'",
     "test": "jest",
+    "test:logged": "jest 2>&1 | ansifilter -o test.log",
     "test:watch": "jest --watch",
     "test:e2e": "jest --testPathPattern=e2e.spec.ts",
     "test:unit": "jest --testPathIgnorePatterns=e2e.spec.ts",

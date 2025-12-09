@@ -199,7 +199,7 @@ describe("PrivacyManager - Masking Statistics Property Tests", () => {
       expect(stats.phonesRedacted).toBe(0);
       expect(stats.creditCardsRedacted).toBe(0);
       expect(stats.customPatternsRedacted).toBe(0);
-    });
+    }, 60000);
   });
 });
 

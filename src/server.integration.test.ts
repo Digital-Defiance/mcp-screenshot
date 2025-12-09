@@ -120,7 +120,7 @@ describe("MCPScreenshotServer Integration", () => {
     expect(result).toHaveProperty("status");
     expect(result.status).toBe("success");
     expect(result).toHaveProperty("displays");
-  });
+  }, 30000);
 
   it("should route screenshot_list_windows correctly", async () => {
     const result = await (server as any).handleToolCall(
@@ -130,5 +130,5 @@ describe("MCPScreenshotServer Integration", () => {
     expect(result).toHaveProperty("status");
     expect(result.status).toBe("success");
     expect(result).toHaveProperty("windows");
-  });
+  }, 30000);
 });
