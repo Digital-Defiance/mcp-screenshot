@@ -79,7 +79,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Labels for metadata
 LABEL org.opencontainers.image.title="MCP Screenshot Server" \
       org.opencontainers.image.description="Enterprise-grade MCP server for screenshot capture and processing" \
-      org.opencontainers.image.vendor="digitaldefiance" \
+      org.opencontainers.image.vendor="Digital Defiance" \
       org.opencontainers.image.authors="Jessica Mulein <jessica@digitaldefiance.org>" \
       org.opencontainers.image.url="https://github.com/digital-defiance/ai-capabilities-suite" \
       org.opencontainers.image.source="https://github.com/digital-defiance/ai-capabilities-suite" \
