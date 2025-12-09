@@ -41,7 +41,7 @@ RUN addgroup -g 1001 -S mcp && \
 WORKDIR /app
 
 # Install the published package from NPM
-RUN npm install -g @ai-capabilities-suite/mcp-screenshot@1.0.2
+RUN npm install -g @ai-capabilities-suite/mcp-screenshot@1.0.5
 
 # Copy Tesseract data
 COPY --chown=mcp:mcp eng.traineddata /usr/share/tessdata/
@@ -79,7 +79,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Labels for metadata
 LABEL org.opencontainers.image.title="MCP Screenshot Server" \
       org.opencontainers.image.description="Enterprise-grade MCP server for screenshot capture and processing" \
-      org.opencontainers.image.vendor="DigiDefiance" \
+      org.opencontainers.image.vendor="digitaldefiance" \
       org.opencontainers.image.authors="Jessica Mulein <jessica@digitaldefiance.org>" \
       org.opencontainers.image.url="https://github.com/digital-defiance/ai-capabilities-suite" \
       org.opencontainers.image.source="https://github.com/digital-defiance/ai-capabilities-suite" \

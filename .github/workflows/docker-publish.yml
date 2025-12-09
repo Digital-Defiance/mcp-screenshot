@@ -12,7 +12,7 @@ on:
         default: "latest"
 
 env:
-  DOCKER_IMAGE: digidefiance/mcp-screenshot
+  DOCKER_IMAGE: digitaldefiance/mcp-screenshot
   GHCR_IMAGE: ghcr.io/digital-defiance/mcp-screenshot
   PLATFORMS: linux/amd64,linux/arm64
 

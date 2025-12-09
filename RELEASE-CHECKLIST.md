@@ -29,7 +29,7 @@ npm publish --access public
 ./packages/mcp-screenshot/docker-build-push.sh --push
 ```
 
-**Verify**: https://hub.docker.com/r/digidefiance/mcp-screenshot/tags
+**Verify**: https://hub.docker.com/r/digitaldefiance/mcp-screenshot/tags
 
 ### 3. VSCode Extension
 
@@ -62,7 +62,7 @@ Then create GitHub release:
 
 ## Release Notes Template
 
-```markdown
+````markdown
 # MCP Screenshot v1.0.0
 
 ## 🎉 What's New
@@ -85,13 +85,15 @@ Then create GitHub release:
 ```bash
 npm install -g @ai-capabilities-suite/mcp-screenshot@1.0.0
 ```
-```
+````
+
+````
 
 ### Docker
 
 ```bash
-docker pull digidefiance/mcp-screenshot:1.0.0
-```
+docker pull digitaldefiance/mcp-screenshot:1.0.0
+````
 
 ### VSCode Extension
 
@@ -100,7 +102,7 @@ Search "MCP Screenshot" in VS Code Extensions
 ## 🔗 Links
 
 - NPM: https://www.npmjs.com/package/@ai-capabilities-suite/mcp-screenshot
-- Docker Hub: https://hub.docker.com/r/digidefiance/mcp-screenshot
+- Docker Hub: https://hub.docker.com/r/digitaldefiance/mcp-screenshot
 - VSCode Marketplace: https://marketplace.visualstudio.com/items?itemName=DigitalDefiance.mcp-screenshot
 - Documentation: https://github.com/digital-defiance/ai-capabilities-suite/tree/main/packages/mcp-screenshot
 
@@ -117,7 +119,8 @@ Search "MCP Screenshot" in VS Code Extensions
 - Version management automation
 
 **Full Changelog**: https://github.com/digital-defiance/ai-capabilities-suite/compare/mcp-screenshot-v0.0.2...mcp-screenshot-v1.0.0
-```
+
+````
 
 ## Post-Release
 
@@ -136,7 +139,7 @@ For automated release (interactive):
 ```bash
 cd packages/mcp-screenshot
 ./release.sh
-```
+````
 
 ## Manual Release Commands
 

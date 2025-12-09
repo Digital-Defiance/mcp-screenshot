@@ -6,12 +6,12 @@
 
 ```bash
 # Pull the image
-docker pull digidefiance/mcp-screenshot:latest
+docker pull digitaldefiance/mcp-screenshot:latest
 
 # Run with default configuration
 docker run -i --rm \
   -v $(pwd)/screenshots:/app/screenshots \
-  digidefiance/mcp-screenshot:latest
+  digitaldefiance/mcp-screenshot:latest
 ```
 
 ### Docker Compose
@@ -19,11 +19,11 @@ docker run -i --rm \
 Create `docker-compose.yml`:
 
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   mcp-screenshot:
-    image: digidefiance/mcp-screenshot:latest
+    image: digitaldefiance/mcp-screenshot:latest
     stdin_open: true
     volumes:
       - ./screenshots:/app/screenshots
@@ -34,6 +34,7 @@ services:
 ```
 
 Run:
+
 ```bash
 docker-compose up -d
 ```
@@ -51,20 +52,17 @@ The server accepts configuration via a JSON file:
     "maxCapturesPerMinute": 10,
     "enableAuditLog": true
   },
-  "excludedWindowPatterns": [
-    ".*password.*",
-    ".*1Password.*",
-    ".*LastPass.*"
-  ]
+  "excludedWindowPatterns": [".*password.*", ".*1Password.*", ".*LastPass.*"]
 }
 ```
 
 Mount the config file:
+
 ```bash
 docker run -i --rm \
   -v $(pwd)/config.json:/app/config/config.json:ro \
   -v $(pwd)/screenshots:/app/screenshots \
-  digidefiance/mcp-screenshot:latest \
+  digitaldefiance/mcp-screenshot:latest \
   node dist/cli.js --config=/app/config/config.json
 ```
 
@@ -76,9 +74,11 @@ docker run -i --rm \
 ## Tools
 
 ### screenshot_capture_full
+
 Capture full screen or specific display.
 
 **Example:**
+
 ```json
 {
   "tool": "screenshot_capture_full",
@@ -90,9 +90,11 @@ Capture full screen or specific display.
 ```
 
 ### screenshot_capture_window
+
 Capture specific application window.
 
 **Example:**
+
 ```json
 {
   "tool": "screenshot_capture_window",
@@ -104,9 +106,11 @@ Capture specific application window.
 ```
 
 ### screenshot_capture_region
+
 Capture rectangular screen region.
 
 **Example:**
+
 ```json
 {
   "tool": "screenshot_capture_region",
@@ -121,9 +125,11 @@ Capture rectangular screen region.
 ```
 
 ### screenshot_list_displays
+
 List all connected displays.
 
 ### screenshot_list_windows
+
 List all visible windows.
 
 ## Features
@@ -139,6 +145,7 @@ List all visible windows.
 ## Security
 
 The container runs as a non-root user and includes:
+
 - Read-only root filesystem
 - No new privileges
 - Dropped capabilities
@@ -152,6 +159,7 @@ The container runs as a non-root user and includes:
 ## Resource Limits
 
 Recommended limits:
+
 - CPU: 2 cores (limit), 0.5 cores (request)
 - Memory: 2Gi (limit), 512Mi (request)
 

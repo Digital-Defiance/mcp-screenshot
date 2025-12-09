@@ -14,32 +14,36 @@ The following files are prepared for submission in the `docker-mcp-registry/` di
 
 ## Docker Image Information
 
-- **Image Name**: `digidefiance/mcp-screenshot`
+- **Image Name**: `digitaldefiance/mcp-screenshot`
 - **Tags**: `latest`, `0.0.2`, `v0.0.2`
 - **Registry**: Docker Hub
-- **Image URL**: https://hub.docker.com/r/digidefiance/mcp-screenshot
+- **Image URL**: https://hub.docker.com/r/digitaldefiance/mcp-screenshot
 
 ## Submission Process
 
 ### Option 1: GitHub PR (Recommended)
 
 1. Fork the Docker MCP Registry repository:
+
    ```bash
    git clone https://github.com/docker/mcp-registry.git
    cd mcp-registry
    ```
 
 2. Create a new directory for your server:
+
    ```bash
    mkdir -p servers/mcp-screenshot
    ```
 
 3. Copy submission files:
+
    ```bash
    cp packages/mcp-screenshot/docker-mcp-registry/* servers/mcp-screenshot/
    ```
 
 4. Create a branch and commit:
+
    ```bash
    git checkout -b add-mcp-screenshot
    git add servers/mcp-screenshot
@@ -47,6 +51,7 @@ The following files are prepared for submission in the `docker-mcp-registry/` di
    ```
 
 5. Push and create PR:
+
    ```bash
    git push origin add-mcp-screenshot
    ```
@@ -62,7 +67,7 @@ If the Docker MCP Registry has a web submission form:
 1. Navigate to the submission page
 2. Fill in the form with:
    - Server Name: MCP Screenshot
-   - Docker Image: digidefiance/mcp-screenshot:latest
+   - Docker Image: digitaldefiance/mcp-screenshot:latest
    - Category: Productivity, Development Tools
    - Description: Cross-platform screenshot capture for AI agents
 3. Upload the three files from `docker-mcp-registry/`
@@ -73,7 +78,7 @@ If the Docker MCP Registry has a web submission form:
 Before submitting, verify:
 
 - [x] Docker image is published and accessible
-- [x] Image runs successfully: `docker run -i --rm digidefiance/mcp-screenshot:latest`
+- [x] Image runs successfully: `docker run -i --rm digitaldefiance/mcp-screenshot:latest`
 - [x] All 5 tools are functional
 - [x] Documentation is complete and accurate
 - [x] Examples work as documented
@@ -87,18 +92,18 @@ Test the Docker image locally before submitting:
 
 ```bash
 # Pull the image
-docker pull digidefiance/mcp-screenshot:latest
+docker pull digitaldefiance/mcp-screenshot:latest
 
 # Test basic functionality
 docker run -i --rm \
   -v $(pwd)/test-screenshots:/app/screenshots \
-  digidefiance/mcp-screenshot:latest
+  digitaldefiance/mcp-screenshot:latest
 
 # Test with configuration
 docker run -i --rm \
   -v $(pwd)/config.json:/app/config/config.json:ro \
   -v $(pwd)/test-screenshots:/app/screenshots \
-  digidefiance/mcp-screenshot:latest
+  digitaldefiance/mcp-screenshot:latest
 ```
 
 ## Post-Submission
@@ -129,4 +134,3 @@ After submission:
 ## License
 
 MIT License - See LICENSE file for details
-

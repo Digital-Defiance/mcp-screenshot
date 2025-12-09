@@ -4,7 +4,7 @@
 [![GitHub Release](https://img.shields.io/github/v/release/digital-defiance/mcp-screenshot?label=Release&logo=github)](https://github.com/digital-defiance/mcp-screenshot/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/digidefiance/mcp-screenshot)](https://hub.docker.com/r/digidefiance/mcp-screenshot)
+[![Docker Pulls](https://img.shields.io/docker/pulls/digitaldefiance/mcp-screenshot)](https://hub.docker.com/r/digitaldefiance/mcp-screenshot)
 
 **Give AI agents visual superpowers to see, analyze, and document your applications like senior UX designers.**
 
@@ -19,6 +19,7 @@ This repository is part of the [AI Capabilitites Suite](https://github.com/Digit
 ## 🤔 Why Do AI Agents Need Visual Capabilities?
 
 **AI agents today are powerful but visually blind:**
+
 - ❌ Can read HTML/CSS but can't see actual layouts
 - ❌ Can suggest UI improvements without seeing the real user experience
 - ❌ Can't detect accessibility issues like poor contrast or spacing
@@ -32,6 +33,7 @@ This repository is part of the [AI Capabilitites Suite](https://github.com/Digit
 ## 🎯 Revolutionary Use Cases
 
 ### 📚 **"AI, create professional documentation"**
+
 ```
 You: "Document the checkout process with screenshots"
 AI: *Captures each step, analyzes UI flow*
@@ -39,6 +41,7 @@ AI: "Generated complete user guide with 6 annotated screenshots, highlighting ke
 ```
 
 ### 🔍 **"AI, audit this page for accessibility"**
+
 ```
 You: "Check if this form meets WCAG guidelines"
 AI: *Captures form, analyzes visual elements*
@@ -46,6 +49,7 @@ AI: "Found 4 accessibility issues: contrast ratio 2.1:1 (needs 4.5:1), missing f
 ```
 
 ### 🐛 **"AI, create a detailed bug report"**
+
 ```
 You: "The mobile navigation is broken"
 AI: *Captures different viewport sizes*
@@ -53,6 +57,7 @@ AI: "Created bug report with before/after screenshots, exact breakpoint where it
 ```
 
 ### 🎨 **"AI, compare these design variations"**
+
 ```
 You: "Which hero section design works better?"
 AI: *Captures both versions, analyzes visual hierarchy*
@@ -60,6 +65,7 @@ AI: "Version B has 28% better visual flow—CTA more prominent, text hierarchy c
 ```
 
 ### 📱 **"AI, test responsive design"**
+
 ```
 You: "How does this look on different screen sizes?"
 AI: *Captures multiple viewport sizes*
@@ -71,12 +77,14 @@ AI: "Layout breaks at 768px—sidebar overlaps content. Here's the media query f
 ## ✨ What This Changes
 
 **Before:** AI worked blind, relying on code descriptions
+
 - ❌ "The button looks wrong" → AI guesses the issue
 - ❌ "Create documentation" → AI writes generic text
 - ❌ "Check accessibility" → AI only reviews code
 - ❌ "Test responsive design" → AI can't see actual breakpoints
 
 **After:** AI sees and analyzes your actual user interface
+
 - ✅ **Visual debugging** - AI identifies exact pixel-level issues
 - ✅ **Smart documentation** - AI creates guides with real screenshots and annotations
 - ✅ **Accessibility audits** - AI measures actual contrast ratios and spacing
@@ -108,6 +116,7 @@ npm install @ai-capabilities-suite/mcp-screenshot
 ### System Requirements
 
 **Linux:**
+
 - X11: `imagemagick` package (provides `import` command)
 - Wayland: `grim` package
 
@@ -123,10 +132,12 @@ sudo pacman -S imagemagick grim
 ```
 
 **macOS:**
+
 - Built-in `screencapture` command (no additional dependencies)
 - Screen Recording permission required (System Preferences > Security & Privacy > Privacy > Screen Recording)
 
 **Windows:**
+
 - No additional dependencies required
 
 ### MCP Configuration
@@ -160,6 +171,7 @@ The server exposes 5 comprehensive MCP tools that enable AI agents to see and un
 Capture full screen or specific display.
 
 **Parameters:**
+
 - `display` (string, optional): Display ID to capture (defaults to primary display)
 - `format` (string, optional): Image format - `png`, `jpeg`, `webp`, or `bmp` (default: `png`)
 - `quality` (number, optional): Compression quality 1-100 for lossy formats (default: 90)
@@ -167,6 +179,7 @@ Capture full screen or specific display.
 - `enablePIIMasking` (boolean, optional): Enable PII detection and masking (default: false)
 
 **Example:**
+
 ```json
 {
   "name": "screenshot_capture_full",
@@ -179,6 +192,7 @@ Capture full screen or specific display.
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -211,6 +225,7 @@ Capture full screen or specific display.
 Capture specific application window by ID or title pattern.
 
 **Parameters:**
+
 - `windowId` (string, optional): Window identifier (use `windowId` or `windowTitle`)
 - `windowTitle` (string, optional): Window title pattern to match (use `windowId` or `windowTitle`)
 - `includeFrame` (boolean, optional): Include window frame and title bar (default: false)
@@ -219,6 +234,7 @@ Capture specific application window by ID or title pattern.
 - `savePath` (string, optional): File path to save screenshot
 
 **Example:**
+
 ```json
 {
   "name": "screenshot_capture_window",
@@ -232,6 +248,7 @@ Capture specific application window by ID or title pattern.
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -259,6 +276,7 @@ Capture specific application window by ID or title pattern.
 Capture specific rectangular region of the screen.
 
 **Parameters:**
+
 - `x` (number, required): X coordinate of top-left corner
 - `y` (number, required): Y coordinate of top-left corner
 - `width` (number, required): Width of region in pixels
@@ -268,6 +286,7 @@ Capture specific rectangular region of the screen.
 - `savePath` (string, optional): File path to save screenshot
 
 **Example:**
+
 ```json
 {
   "name": "screenshot_capture_region",
@@ -282,6 +301,7 @@ Capture specific rectangular region of the screen.
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -310,6 +330,7 @@ List all connected displays with resolution and position information.
 **Parameters:** None
 
 **Example:**
+
 ```json
 {
   "name": "screenshot_list_displays",
@@ -318,6 +339,7 @@ List all connected displays with resolution and position information.
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -347,6 +369,7 @@ List all visible windows with title, process, and position information.
 **Parameters:** None
 
 **Example:**
+
 ```json
 {
   "name": "screenshot_list_windows",
@@ -355,6 +378,7 @@ List all visible windows with title, process, and position information.
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -396,10 +420,7 @@ Create a `security-policy.json` file:
 
 ```json
 {
-  "allowedDirectories": [
-    "/home/user/screenshots",
-    "/tmp/screenshots"
-  ],
+  "allowedDirectories": ["/home/user/screenshots", "/tmp/screenshots"],
   "blockedWindowPatterns": [
     ".*Password.*",
     ".*1Password.*",
@@ -415,10 +436,10 @@ Create a `security-policy.json` file:
 Load the policy when starting the server:
 
 ```typescript
-import { MCPScreenshotServer } from '@ai-capabilities-suite/mcp-screenshot';
-import * as fs from 'fs';
+import { MCPScreenshotServer } from "@ai-capabilities-suite/mcp-screenshot";
+import * as fs from "fs";
 
-const policy = JSON.parse(fs.readFileSync('security-policy.json', 'utf-8'));
+const policy = JSON.parse(fs.readFileSync("security-policy.json", "utf-8"));
 const server = new MCPScreenshotServer(policy);
 await server.start();
 ```
@@ -429,19 +450,19 @@ All tools return structured error responses with error codes and remediation sug
 
 ### Error Codes
 
-| Code | Description | Remediation |
-|------|-------------|-------------|
-| `PERMISSION_DENIED` | Insufficient permissions to capture | Grant Screen Recording permission (macOS) or check user permissions |
-| `INVALID_PATH` | File path outside allowed directories | Use a path within configured allowed directories |
-| `WINDOW_NOT_FOUND` | Specified window does not exist | Use `screenshot_list_windows` to find available windows |
-| `DISPLAY_NOT_FOUND` | Specified display does not exist | Use `screenshot_list_displays` to find available displays |
-| `UNSUPPORTED_FORMAT` | Requested format not supported | Use png, jpeg, webp, or bmp |
-| `CAPTURE_FAILED` | Screenshot capture failed | Check permissions and try again |
-| `RATE_LIMIT_EXCEEDED` | Too many captures in time window | Wait before making additional requests |
-| `INVALID_REGION` | Invalid region coordinates or dimensions | Ensure coordinates are non-negative and dimensions are positive |
-| `OUT_OF_MEMORY` | Insufficient memory for operation | Reduce capture size or close other applications |
-| `ENCODING_FAILED` | Image encoding failed | Try different format or reduce quality |
-| `FILE_SYSTEM_ERROR` | File system operation failed | Check permissions and disk space |
+| Code                  | Description                              | Remediation                                                         |
+| --------------------- | ---------------------------------------- | ------------------------------------------------------------------- |
+| `PERMISSION_DENIED`   | Insufficient permissions to capture      | Grant Screen Recording permission (macOS) or check user permissions |
+| `INVALID_PATH`        | File path outside allowed directories    | Use a path within configured allowed directories                    |
+| `WINDOW_NOT_FOUND`    | Specified window does not exist          | Use `screenshot_list_windows` to find available windows             |
+| `DISPLAY_NOT_FOUND`   | Specified display does not exist         | Use `screenshot_list_displays` to find available displays           |
+| `UNSUPPORTED_FORMAT`  | Requested format not supported           | Use png, jpeg, webp, or bmp                                         |
+| `CAPTURE_FAILED`      | Screenshot capture failed                | Check permissions and try again                                     |
+| `RATE_LIMIT_EXCEEDED` | Too many captures in time window         | Wait before making additional requests                              |
+| `INVALID_REGION`      | Invalid region coordinates or dimensions | Ensure coordinates are non-negative and dimensions are positive     |
+| `OUT_OF_MEMORY`       | Insufficient memory for operation        | Reduce capture size or close other applications                     |
+| `ENCODING_FAILED`     | Image encoding failed                    | Try different format or reduce quality                              |
+| `FILE_SYSTEM_ERROR`   | File system operation failed             | Check permissions and disk space                                    |
 
 ### Error Response Format
 
@@ -466,6 +487,7 @@ All tools return structured error responses with error codes and remediation sug
 **Problem:** `import: command not found` or `grim: command not found`
 
 **Solution:** Install required packages:
+
 ```bash
 # X11
 sudo apt-get install imagemagick
@@ -477,6 +499,7 @@ sudo apt-get install grim
 **Problem:** Black screen or empty captures
 
 **Solution:** Check display server environment variables:
+
 ```bash
 echo $DISPLAY  # Should show :0 or similar for X11
 echo $WAYLAND_DISPLAY  # Should show wayland-0 or similar for Wayland
@@ -487,6 +510,7 @@ echo $WAYLAND_DISPLAY  # Should show wayland-0 or similar for Wayland
 **Problem:** `PERMISSION_DENIED` error
 
 **Solution:** Grant Screen Recording permission:
+
 1. Open System Preferences > Security & Privacy > Privacy
 2. Select "Screen Recording" from the list
 3. Add your terminal application or Node.js to the allowed list
@@ -518,7 +542,8 @@ echo $WAYLAND_DISPLAY  # Should show wayland-0 or similar for Wayland
 
 **Problem:** PII masking not working
 
-**Solution:** 
+**Solution:**
+
 - Ensure tesseract.js is properly installed
 - Check that `eng.traineddata` language file is available
 - PII masking requires OCR which may be slow on large images
@@ -526,6 +551,7 @@ echo $WAYLAND_DISPLAY  # Should show wayland-0 or similar for Wayland
 **Problem:** Large file sizes
 
 **Solution:**
+
 - Use JPEG format with lower quality (60-80) for smaller files
 - Use WebP format for best compression
 - Reduce capture region size if possible
@@ -533,6 +559,7 @@ echo $WAYLAND_DISPLAY  # Should show wayland-0 or similar for Wayland
 **Problem:** Out of memory errors
 
 **Solution:**
+
 - Capture smaller regions instead of full screen
 - Reduce quality settings
 - Close other applications to free memory
@@ -543,14 +570,14 @@ echo $WAYLAND_DISPLAY  # Should show wayland-0 or similar for Wayland
 ### TypeScript/JavaScript
 
 ```typescript
-import { MCPScreenshotServer } from '@ai-capabilities-suite/mcp-screenshot';
+import { MCPScreenshotServer } from "@ai-capabilities-suite/mcp-screenshot";
 
 // Create server with custom security policy
 const server = new MCPScreenshotServer({
-  allowedDirectories: ['/home/user/screenshots'],
+  allowedDirectories: ["/home/user/screenshots"],
   maxCapturesPerMinute: 30,
   enableAuditLog: true,
-  blockedWindowPatterns: ['.*Password.*']
+  blockedWindowPatterns: [".*Password.*"],
 });
 
 // Start server
@@ -558,7 +585,7 @@ await server.start();
 
 // Server will handle MCP protocol requests via stdio
 // Keep process running
-process.on('SIGINT', async () => {
+process.on("SIGINT", async () => {
   await server.stop();
   process.exit(0);
 });
@@ -567,7 +594,7 @@ process.on('SIGINT', async () => {
 ### Direct Capture Engine Usage
 
 ```typescript
-import { createCaptureEngine } from '@ai-capabilities-suite/mcp-screenshot';
+import { createCaptureEngine } from "@ai-capabilities-suite/mcp-screenshot";
 
 // Create platform-specific capture engine
 const engine = createCaptureEngine();
@@ -577,7 +604,7 @@ const fullScreen = await engine.captureScreen();
 
 // List and capture windows
 const windows = await engine.getWindows();
-const window = windows.find(w => w.title.includes('Chrome'));
+const window = windows.find((w) => w.title.includes("Chrome"));
 if (window) {
   const buffer = await engine.captureWindow(window.id, false);
 }
@@ -639,6 +666,7 @@ packages/mcp-screenshot/
 ## Contributing
 
 Contributions are welcome! Please ensure:
+
 - All tests pass (`npm test`)
 - Code follows TypeScript best practices
 - New features include tests and documentation
@@ -651,6 +679,7 @@ MIT
 ## Support
 
 For issues and questions:
+
 - GitHub Issues: [Create an issue](https://github.com/your-org/ai-capabilities-suite/issues)
 - Documentation: See TESTING.md for testing guide
 - Security: Report security issues privately to security@example.com

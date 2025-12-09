@@ -15,7 +15,7 @@ repository:
 
 # Docker configuration
 docker:
-  image: digidefiance/mcp-screenshot
+  image: digitaldefiance/mcp-screenshot
   tag: latest
   alternativeImages:
     - ghcr.io/digital-defiance/mcp-screenshot:latest
@@ -197,7 +197,7 @@ configuration:
     - ${PWD}/screenshots:/app/screenshots
     - -v
     - ${PWD}/config.json:/app/config/config.json:ro
-    - digidefiance/mcp-screenshot:latest
+    - digitaldefiance/mcp-screenshot:latest
 
 # Security
 security:
