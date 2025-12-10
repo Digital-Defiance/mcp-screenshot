@@ -679,7 +679,10 @@ describe("MCP Screenshot Server - E2E", () => {
           ) || listResponse.windows[0];
 
         // Escape special regex characters in the title because getWindowByTitle uses it as a regex pattern
-        const escapedTitle = window.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const escapedTitle = window.title.replace(
+          /[.*+?^${}()|[\]\\]/g,
+          "\\$&"
+        );
 
         const result = await sendRequest("tools/call", {
           name: "screenshot_capture_window",

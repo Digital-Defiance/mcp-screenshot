@@ -412,7 +412,9 @@ describe("Full Screen Capture Integration Tests", () => {
         await fs.promises.writeFile(tempPath, captureBuffer);
 
         // Process with PII masking
-        const { maskedBuffer, stats } = await privacyManager.maskPII(captureBuffer);
+        const { maskedBuffer, stats } = await privacyManager.maskPII(
+          captureBuffer
+        );
 
         expect(maskedBuffer).toBeInstanceOf(Buffer);
         expect(maskedBuffer.length).toBeGreaterThan(0);

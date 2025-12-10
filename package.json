@@ -1,6 +1,6 @@
 {
   "name": "@ai-capabilities-suite/mcp-screenshot",
-  "version": "1.5.21",
+  "version": "1.5.22",
   "packageManager": "yarn@4.12.0",
   "mcpName": "io.github.Digital-Defiance/mcp-screenshot",
   "description": "MCP server providing screenshot capture capabilities for AI agents with multi-format support, PII masking, and security controls",

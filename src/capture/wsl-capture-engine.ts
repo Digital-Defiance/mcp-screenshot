@@ -34,7 +34,10 @@ export class WSLCaptureEngine extends BaseCaptureEngine {
     // Increase maxBuffer to 50MB to handle large base64 image output
     const { stdout, stderr } = await execAsync(
       `powershell.exe -NoProfile -NonInteractive -Command "${escapedCommand}"`,
-      { maxBuffer: 50 * 1024 * 1024 }
+      {
+        maxBuffer: 50 * 1024 * 1024,
+        shell: "/bin/bash", // Use bash which has Windows paths in WSL
+      }
     );
 
     if (stderr && !stderr.includes("CLM")) {
