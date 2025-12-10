@@ -29,7 +29,7 @@ export class MCPScreenshotServer {
     this.server = new Server(
       {
         name: "mcp-screenshot",
-        version: "1.5.20",
+        version: "1.5.21",
       },
       {
         capabilities: {
