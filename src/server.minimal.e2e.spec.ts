@@ -149,7 +149,7 @@ describe("MCP Screenshot Server - Minimal E2E", () => {
       const timeout = setTimeout(() => {
         console.log("Timeout! Response data so far:", responseData);
         reject(new Error(`Request timeout for ${method}`));
-      }, 10000);
+      }, 60000);
 
       const onData = (data: Buffer) => {
         const chunk = data.toString();

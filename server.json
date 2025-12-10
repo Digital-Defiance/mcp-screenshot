@@ -6,13 +6,13 @@
     "url": "https://github.com/Digital-Defiance/mcp-screenshot",
     "source": "github"
   },
-  "version": "1.0.7",
+  "version": "1.5.20",
   "websiteUrl": "https://github.com/Digital-Defiance/mcp-screenshot",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@ai-capabilities-suite/mcp-screenshot",
-      "version": "1.0.7",
+      "version": "1.5.20",
       "transport": {
         "type": "stdio"
       }

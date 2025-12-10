@@ -163,10 +163,12 @@ describe("Window Capture Integration Tests", () => {
         const firstWindow = windows[0];
         const foundWindow = await captureEngine.getWindowById(firstWindow.id);
 
-        expect(foundWindow).toBeDefined();
-        expect(foundWindow?.id).toBe(firstWindow.id);
-        expect(foundWindow?.title).toBe(firstWindow.title);
-        expect(foundWindow?.processName).toBe(firstWindow.processName);
+        expect(foundWindow).not.toBeNull();
+        if (foundWindow) {
+          expect(foundWindow.id).toBe(firstWindow.id);
+          expect(foundWindow.title).toBe(firstWindow.title);
+          expect(foundWindow.processName).toBe(firstWindow.processName);
+        }
       } catch (error) {
         const errorMessage = (error as Error)?.message || "";
         if (
