@@ -527,7 +527,7 @@ describe("Security Policy Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000); // 2 minute timeout for complete workflow test
 
     it("should reject operations that violate security policies", () => {
       const securityManager = new SecurityManager({

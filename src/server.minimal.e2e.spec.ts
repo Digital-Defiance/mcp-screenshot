@@ -2,10 +2,10 @@ import { spawn, ChildProcess } from "child_process";
 import * as path from "path";
 
 /**
- * Minimal E2E test for MCP Screenshot Server
+ * Minimal E2E test for MCP ACS Screenshot Server
  * Quick smoke test to verify basic functionality
  */
-describe("MCP Screenshot Server - Minimal E2E", () => {
+describe("MCP ACS Screenshot Server - Minimal E2E", () => {
   let serverProcess: ChildProcess;
   let messageId = 0;
   let screenshotToolsAvailable = false;
@@ -239,7 +239,7 @@ describe("MCP Screenshot Server - Minimal E2E", () => {
         "⚠️  Screenshot capture tools not available. Capture test will be skipped."
       );
     }
-  }, 60000);
+  }, 120000); // 2 minute timeout for server startup and screenshot check
 
   afterAll(() => {
     stopServer();

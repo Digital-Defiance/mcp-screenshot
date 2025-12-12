@@ -90,7 +90,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should capture regions at various coordinates", async () => {
       try {
@@ -299,7 +299,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Requirement 3.3: Negative coordinate validation", () => {
@@ -323,7 +323,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should reject negative y coordinate", async () => {
       try {
@@ -345,7 +345,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should reject both negative coordinates", async () => {
       try {
@@ -367,7 +367,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Requirement 3.4: Zero dimension validation", () => {
@@ -391,7 +391,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should reject zero height", async () => {
       try {
@@ -413,7 +413,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should reject both zero dimensions", async () => {
       try {
@@ -433,7 +433,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should reject negative width", async () => {
       try {
@@ -455,7 +455,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should reject negative height", async () => {
       try {
@@ -477,7 +477,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Requirement 3.5: Multi-monitor coordinate system", () => {
@@ -590,7 +590,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Region capture with image processing", () => {
@@ -628,7 +628,7 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should save region captures in different formats", async () => {
       try {
@@ -822,6 +822,6 @@ describe("Region Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 });

@@ -1,4 +1,4 @@
-# 📸 MCP Screenshot Server
+# 📸 MCP ACS Screenshot Server
 
 [![NPM Version](https://img.shields.io/npm/v/@ai-capabilities-suite/mcp-screenshot)](https://www.npmjs.com/package/@ai-capabilities-suite/mcp-screenshot)
 [![GitHub Release](https://img.shields.io/github/v/release/digital-defiance/mcp-screenshot?label=Release&logo=github)](https://github.com/digital-defiance/mcp-screenshot/releases)
@@ -682,4 +682,4 @@ For issues and questions:
 
 - GitHub Issues: [Create an issue](https://github.com/your-org/ai-capabilities-suite/issues)
 - Documentation: See TESTING.md for testing guide
-- Security: Report security issues privately to security@example.com
+- Security: Report security issues privately to <security@example.com>

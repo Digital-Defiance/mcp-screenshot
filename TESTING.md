@@ -1,4 +1,4 @@
-# MCP Screenshot Testing Guide
+# MCP ACS Screenshot Testing Guide
 
 ## Test Structure
 
@@ -16,11 +16,13 @@ packages/mcp-screenshot/
 ## Test Types
 
 ### 1. Property-Based Tests (PBT)
+
 Located in: `src/capture/capture-engine.property.spec.ts`
 
 Uses `fast-check` to test universal properties across many inputs.
 
 **Property 1: Full screen capture dimensions match display resolution**
+
 - Validates that captured images match display resolution
 - Tests both primary and multi-display scenarios
 - Runs with graceful fallback for missing tools
@@ -30,9 +32,11 @@ npm test -- capture-engine.property.spec.ts
 ```
 
 ### 2. End-to-End Tests
+
 Located in: `src/e2e/screenshot-workflow.e2e.spec.ts`
 
 Tests complete workflows integrating all components:
+
 - Full screen capture workflow
 - Region capture workflow
 - Window capture workflow
@@ -46,6 +50,7 @@ npm test -- screenshot-workflow.e2e.spec.ts
 ```
 
 ### 3. Unit Tests
+
 Located in: `src/types/index.spec.ts`
 
 Basic tests for type definitions and infrastructure.
@@ -57,21 +62,25 @@ npm test -- index.spec.ts
 ## Running Tests
 
 ### Run all tests
+
 ```bash
 npm test
 ```
 
 ### Run specific test file
+
 ```bash
 npm test -- <filename>
 ```
 
 ### Run tests in watch mode
+
 ```bash
 npm run test:watch
 ```
 
 ### Run with coverage
+
 ```bash
 npm test -- --coverage
 ```
@@ -79,6 +88,7 @@ npm test -- --coverage
 ## Test Configuration
 
 ### Jest Configuration
+
 File: `jest.config.js`
 
 - **Test environment**: Node.js
@@ -87,6 +97,7 @@ File: `jest.config.js`
 - **Coverage directory**: `test-output/jest/coverage`
 
 ### SWC Configuration
+
 File: `.spec.swcrc`
 
 Optimized TypeScript compilation for tests.
@@ -190,16 +201,19 @@ Tests are designed to work in CI environments:
 ## Debugging Tests
 
 ### Run single test
+
 ```bash
 npm test -- -t "test name"
 ```
 
 ### Enable verbose output
+
 ```bash
 npm test -- --verbose
 ```
 
 ### Debug in VS Code
+
 Add to `.vscode/launch.json`:
 
 ```json
@@ -226,16 +240,19 @@ Add to `.vscode/launch.json`:
 ## Platform-Specific Considerations
 
 ### Linux
+
 - Requires `grim` (Wayland) or `import` (X11) for screen capture
 - Requires `wmctrl` or `swaymsg` for window enumeration
 - Tests skip gracefully if tools missing
 
 ### macOS
+
 - Uses `screencapture` command
 - Uses AppleScript for window enumeration
 - Generally available on all macOS systems
 
 ### Windows
+
 - Uses PowerShell for capture and enumeration
 - Requires Windows Forms assemblies
 - May need elevated permissions
@@ -245,11 +262,13 @@ Add to `.vscode/launch.json`:
 ### Tests skipping due to missing tools
 
 **Linux (Wayland):**
+
 ```bash
 sudo apt-get install grim slurp
 ```
 
 **Linux (X11):**
+
 ```bash
 sudo apt-get install imagemagick wmctrl
 ```
@@ -263,6 +282,7 @@ PowerShell is built-in, no installation needed.
 ### Tests timing out
 
 Increase timeout in test:
+
 ```typescript
 it("test name", async () => {
   // test code
@@ -272,6 +292,7 @@ it("test name", async () => {
 ### Memory issues
 
 Reduce concurrent test execution:
+
 ```bash
 npm test -- --maxWorkers=2
 ```

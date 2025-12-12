@@ -1,5 +1,5 @@
 /**
- * Basic smoke tests for MCP Screenshot Server
+ * Basic smoke tests for MCP ACS Screenshot Server
  */
 
 import { MCPScreenshotServer } from "./server";

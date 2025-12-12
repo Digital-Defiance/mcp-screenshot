@@ -1,6 +1,6 @@
-# Docker Deployment Guide - MCP Screenshot
+# Docker Deployment Guide - MCP ACS Screenshot
 
-This guide covers deploying the MCP Screenshot server using Docker and Docker Compose.
+This guide covers deploying the MCP ACS Screenshot server using Docker and Docker Compose.
 
 ## Table of Contents
 
@@ -288,6 +288,7 @@ docker run -d \
 ```
 
 Connect with VNC client:
+
 ```bash
 # Using vncviewer
 vncviewer localhost:5900

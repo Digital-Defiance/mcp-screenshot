@@ -1,5 +1,5 @@
 /**
- * Custom error classes for MCP Screenshot server
+ * Custom error classes for MCP ACS Screenshot server
  */
 
 /**

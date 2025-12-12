@@ -38,6 +38,6 @@ cleanup() {
 
 trap cleanup SIGTERM SIGINT
 
-# Start the MCP Screenshot server
-echo "Starting MCP Screenshot server..."
+# Start the MCP ACS Screenshot server
+echo "Starting MCP ACS Screenshot server..."
 exec "$@"

@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
 
-# MCP Screenshot Release Script
+# MCP ACS Screenshot Release Script
 # Automates the complete release process for all platforms
 
 VERSION=$(node -p "require('./package.json').version")
 
-echo "🚀 Starting MCP Screenshot v${VERSION} Release Process"
+echo "🚀 Starting MCP ACS Screenshot v${VERSION} Release Process"
 echo "=================================================="
 echo ""
 

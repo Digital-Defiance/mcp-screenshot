@@ -1,6 +1,6 @@
-# MCP Screenshot - Configuration Guide
+# MCP ACS Screenshot - Configuration Guide
 
-This guide provides detailed configuration examples for the MCP Screenshot server, including security policies, MCP client configurations, and environment variable setups.
+This guide provides detailed configuration examples for the MCP ACS Screenshot server, including security policies, MCP client configurations, and environment variable setups.
 
 ## Table of Contents
 
@@ -287,23 +287,27 @@ SCREENSHOT_TESSERACT_LANG=eng
 ### Platform-Specific Environment Variables
 
 **Linux (X11):**
+
 ```bash
 export DISPLAY=:0
 export SCREENSHOT_ALLOWED_DIRS=/home/user/screenshots
 ```
 
 **Linux (Wayland):**
+
 ```bash
 export WAYLAND_DISPLAY=wayland-0
 export SCREENSHOT_ALLOWED_DIRS=/home/user/screenshots
 ```
 
 **macOS:**
+
 ```bash
 export SCREENSHOT_ALLOWED_DIRS=/Users/username/screenshots
 ```
 
 **Windows (PowerShell):**
+
 ```powershell
 $env:SCREENSHOT_ALLOWED_DIRS="C:\Users\username\screenshots"
 $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
@@ -314,6 +318,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ### Rate Limiting Configuration
 
 #### Conservative Rate Limiting (High Security)
+
 ```json
 {
   "maxCapturesPerMinute": 10,
@@ -322,6 +327,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ```
 
 #### Standard Rate Limiting (Balanced)
+
 ```json
 {
   "maxCapturesPerMinute": 60,
@@ -330,6 +336,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ```
 
 #### Permissive Rate Limiting (Development)
+
 ```json
 {
   "maxCapturesPerMinute": 300,
@@ -340,6 +347,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ### Allowed Directory Configuration
 
 #### Single Directory
+
 ```json
 {
   "allowedDirectories": [
@@ -349,6 +357,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ```
 
 #### Multiple Directories
+
 ```json
 {
   "allowedDirectories": [
@@ -360,6 +369,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ```
 
 #### Workspace-Relative Directories
+
 ```json
 {
   "allowedDirectories": [
@@ -371,6 +381,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ```
 
 #### User-Specific Directories
+
 ```json
 {
   "allowedDirectories": [
@@ -384,6 +395,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ### Window Exclusion Patterns
 
 #### Basic Password Manager Exclusion
+
 ```json
 {
   "blockedWindowPatterns": [
@@ -396,6 +408,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ```
 
 #### Comprehensive Security Application Exclusion
+
 ```json
 {
   "blockedWindowPatterns": [
@@ -417,6 +430,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ```
 
 #### Financial Application Exclusion
+
 ```json
 {
   "blockedWindowPatterns": [
@@ -433,6 +447,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ```
 
 #### Healthcare Application Exclusion
+
 ```json
 {
   "blockedWindowPatterns": [
@@ -448,6 +463,7 @@ $env:SCREENSHOT_MAX_CAPTURES_PER_MIN="60"
 ### Audit Logging Configuration
 
 #### Enable Audit Logging with Custom Format
+
 ```typescript
 import { MCPScreenshotServer } from '@ai-capabilities-suite/mcp-screenshot';
 
@@ -467,11 +483,13 @@ const server = new MCPScreenshotServer({
 ```
 
 #### Redirect Audit Logs to File
+
 ```bash
 node dist/cli.js 2> audit.log
 ```
 
 #### Parse Audit Logs
+
 ```bash
 # Filter successful captures
 cat audit.log | jq 'select(.result == "success")'
@@ -486,6 +504,7 @@ cat audit.log | jq 'select(.result == "error")'
 ### Multi-Environment Configuration
 
 #### Development Environment
+
 ```json
 {
   "allowedDirectories": [
@@ -501,6 +520,7 @@ cat audit.log | jq 'select(.result == "error")'
 ```
 
 #### Staging Environment
+
 ```json
 {
   "allowedDirectories": [
@@ -517,6 +537,7 @@ cat audit.log | jq 'select(.result == "error")'
 ```
 
 #### Production Environment
+
 ```json
 {
   "allowedDirectories": [
@@ -572,6 +593,7 @@ cat audit.log | jq 'select(.result == "error")'
 **Issue:** `INVALID_PATH` errors despite correct configuration
 
 **Solution:** Ensure paths are absolute and properly resolved:
+
 ```json
 {
   "allowedDirectories": [
@@ -585,6 +607,7 @@ cat audit.log | jq 'select(.result == "error")'
 **Issue:** Window exclusion patterns not working
 
 **Solution:** Use proper regex syntax:
+
 ```json
 {
   "blockedWindowPatterns": [
@@ -597,6 +620,7 @@ cat audit.log | jq 'select(.result == "error")'
 **Issue:** Rate limiting too strict
 
 **Solution:** Adjust based on actual usage:
+
 ```json
 {
   "maxCapturesPerMinute": 120  // Increase for high-frequency use
@@ -606,6 +630,7 @@ cat audit.log | jq 'select(.result == "error")'
 **Issue:** Environment variables not being read
 
 **Solution:** Ensure proper format and export:
+
 ```bash
 export SCREENSHOT_ALLOWED_DIRS="/path1,/path2"  # ✓ Comma-separated
 # NOT: SCREENSHOT_ALLOWED_DIRS=/path1:/path2   # ✗ Colon-separated
@@ -614,6 +639,7 @@ export SCREENSHOT_ALLOWED_DIRS="/path1,/path2"  # ✓ Comma-separated
 ## Examples by Use Case
 
 ### Use Case: AI Agent Development
+
 ```json
 {
   "allowedDirectories": [
@@ -630,6 +656,7 @@ export SCREENSHOT_ALLOWED_DIRS="/path1,/path2"  # ✓ Comma-separated
 ```
 
 ### Use Case: Automated Testing
+
 ```json
 {
   "allowedDirectories": [
@@ -643,6 +670,7 @@ export SCREENSHOT_ALLOWED_DIRS="/path1,/path2"  # ✓ Comma-separated
 ```
 
 ### Use Case: Documentation Generation
+
 ```json
 {
   "allowedDirectories": [
@@ -659,6 +687,7 @@ export SCREENSHOT_ALLOWED_DIRS="/path1,/path2"  # ✓ Comma-separated
 ```
 
 ### Use Case: Security Monitoring
+
 ```json
 {
   "allowedDirectories": [
@@ -675,6 +704,7 @@ export SCREENSHOT_ALLOWED_DIRS="/path1,/path2"  # ✓ Comma-separated
 ```
 
 ### Use Case: Customer Support
+
 ```json
 {
   "allowedDirectories": [

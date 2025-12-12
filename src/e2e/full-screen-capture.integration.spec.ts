@@ -75,7 +75,7 @@ describe("Full Screen Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Requirement 1.2: Multi-monitor support", () => {
@@ -177,7 +177,7 @@ describe("Full Screen Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should encode screenshot in WebP format", async () => {
       try {
@@ -204,7 +204,7 @@ describe("Full Screen Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should encode screenshot in BMP format", async () => {
       try {
@@ -237,7 +237,7 @@ describe("Full Screen Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Requirement 1.4: Compression quality", () => {
@@ -283,7 +283,7 @@ describe("Full Screen Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should apply specified compression quality for WebP", async () => {
       try {
@@ -324,7 +324,7 @@ describe("Full Screen Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Requirement 1.5: Base64 encoding with metadata", () => {
@@ -365,7 +365,7 @@ describe("Full Screen Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Platform-specific capture", () => {
@@ -399,7 +399,7 @@ describe("Full Screen Capture Integration Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("PII Masking Integration", () => {

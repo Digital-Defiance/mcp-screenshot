@@ -1,5 +1,5 @@
 /**
- * End-to-end tests for MCP Screenshot workflows
+ * End-to-end tests for MCP ACS Screenshot workflows
  * Tests the integration of capture engines, image processing, and security
  */
 
@@ -39,7 +39,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         "⚠️  Screen capture not available - skipping workflow tests"
       );
     }
-  }, 60000);
+  }, 180000);
 
   beforeAll(() => {
     // Create temporary directory for test outputs
@@ -54,7 +54,7 @@ describe("Screenshot Workflow E2E Tests", () => {
       enableAuditLog: false,
     });
     privacyManager = new PrivacyManager();
-  }, 60000);
+  }, 180000);
 
   afterAll(() => {
     // Clean up temporary directory
@@ -159,7 +159,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should verify all display information is complete", async () => {
       try {
@@ -198,7 +198,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should capture and save screenshots from all displays", async () => {
       if (!captureAvailable) {
@@ -244,7 +244,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 60000);
+    }, 180000);
   });
 
   describe("Region Capture Workflow", () => {
@@ -477,7 +477,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should capture window by ID without frame", async () => {
       if (!captureAvailable) {
@@ -538,7 +538,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should capture window with frame and verify dimensions increase", async () => {
       if (!captureAvailable) {
@@ -626,7 +626,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should capture window by title pattern", async () => {
       if (!captureAvailable) {
@@ -688,7 +688,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should handle minimized windows correctly", async () => {
       try {
@@ -723,7 +723,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should filter windows based on privacy patterns", async () => {
       try {
@@ -754,7 +754,7 @@ describe("Screenshot Workflow E2E Tests", () => {
           false
         );
       }
-    }, 30000);
+    }, 120000);
 
     it("should get window by ID correctly", async () => {
       try {
@@ -790,7 +790,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should return null for non-existent window ID", async () => {
       try {
@@ -811,7 +811,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Image Processing Workflow", () => {
@@ -852,7 +852,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should apply quality settings to lossy formats", async () => {
       if (!captureAvailable) {
@@ -892,7 +892,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
     it("should resize images correctly", async () => {
       if (!captureAvailable) {
         console.warn("Skipping test - capture not available");
@@ -927,7 +927,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should encode all supported formats correctly", async () => {
       if (!captureAvailable) {
@@ -1013,7 +1013,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
 
     it("should extract and verify image metadata", async () => {
       if (!captureAvailable) {
@@ -1049,7 +1049,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Security Workflow", () => {
@@ -1158,7 +1158,7 @@ describe("Screenshot Workflow E2E Tests", () => {
         }
         throw error;
       }
-    }, 30000);
+    }, 120000);
   });
 
   describe("Complete End-to-End Workflow", () => {

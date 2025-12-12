@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * CLI entry point for MCP Screenshot server
+ * CLI entry point for MCP ACS Screenshot server
  */
 
 import { MCPScreenshotServer } from "./server";

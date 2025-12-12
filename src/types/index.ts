@@ -1,5 +1,5 @@
 /**
- * Core type definitions for MCP Screenshot server
+ * Core type definitions for MCP ACS Screenshot server
  */
 
 /**

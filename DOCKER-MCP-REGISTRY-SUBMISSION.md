@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document provides instructions for submitting the MCP Screenshot server to the Docker MCP Registry.
+This document provides instructions for submitting the MCP ACS Screenshot server to the Docker MCP Registry.
 
 ## Submission Files
 
@@ -17,7 +17,7 @@ The following files are prepared for submission in the `docker-mcp-registry/` di
 - **Image Name**: `digitaldefiance/mcp-screenshot`
 - **Tags**: `latest`, `0.0.2`, `v0.0.2`
 - **Registry**: Docker Hub
-- **Image URL**: https://hub.docker.com/r/digitaldefiance/mcp-screenshot
+- **Image URL**: <https://hub.docker.com/r/digitaldefiance/mcp-screenshot>
 
 ## Submission Process
 
@@ -47,7 +47,7 @@ The following files are prepared for submission in the `docker-mcp-registry/` di
    ```bash
    git checkout -b add-mcp-screenshot
    git add servers/mcp-screenshot
-   git commit -m "Add MCP Screenshot server"
+   git commit -m "Add MCP ACS Screenshot server"
    ```
 
 5. Push and create PR:
@@ -57,7 +57,7 @@ The following files are prepared for submission in the `docker-mcp-registry/` di
    ```
 
 6. Open a Pull Request on GitHub with:
-   - Title: "Add MCP Screenshot Server"
+   - Title: "Add MCP ACS Screenshot Server"
    - Description: Include features, use cases, and testing information
 
 ### Option 2: Direct Submission
@@ -66,7 +66,7 @@ If the Docker MCP Registry has a web submission form:
 
 1. Navigate to the submission page
 2. Fill in the form with:
-   - Server Name: MCP Screenshot
+   - Server Name: MCP ACS Screenshot
    - Docker Image: digitaldefiance/mcp-screenshot:latest
    - Category: Productivity, Development Tools
    - Description: Cross-platform screenshot capture for AI agents
@@ -117,10 +117,10 @@ After submission:
 
 ## Support Information
 
-- **GitHub**: https://github.com/digital-defiance/ai-capabilities-suite
-- **Issues**: https://github.com/digital-defiance/ai-capabilities-suite/issues
-- **Email**: info@digitaldefiance.org
-- **Documentation**: https://github.com/digital-defiance/ai-capabilities-suite/tree/main/packages/mcp-screenshot
+- **GitHub**: <https://github.com/digital-defiance/ai-capabilities-suite>
+- **Issues**: <https://github.com/digital-defiance/ai-capabilities-suite/issues>
+- **Email**: <info@digitaldefiance.org>
+- **Documentation**: <https://github.com/digital-defiance/ai-capabilities-suite/tree/main/packages/mcp-screenshot>
 
 ## Version History
 

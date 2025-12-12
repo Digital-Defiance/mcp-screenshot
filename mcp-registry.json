@@ -1,8 +1,8 @@
 {
   "name": "mcp-screenshot",
-  "displayName": "MCP Screenshot Server",
+  "displayName": "MCP ACS Screenshot Server",
   "description": "Cross-platform screenshot capture server for AI agents with multi-format support, PII masking, and security controls",
-  "version": "1.5.22",
+  "version": "1.5.23",
   "author": {
     "name": "Digital Defiance",
     "email": "info@digitaldefiance.org",

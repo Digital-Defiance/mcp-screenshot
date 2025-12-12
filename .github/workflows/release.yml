@@ -90,9 +90,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "v${{ env.NEW_VERSION }}"
-          name: "MCP Screenshot v${{ env.NEW_VERSION }}"
+          name: "MCP ACS Screenshot v${{ env.NEW_VERSION }}"
           body: |
-            ## MCP Screenshot v${{ env.NEW_VERSION }}
+            ## MCP ACS Screenshot v${{ env.NEW_VERSION }}
 
             ${{ env.CHANGELOG }}
 

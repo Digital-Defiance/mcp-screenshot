@@ -1,4 +1,4 @@
-# MCP Screenshot Server - Docker MCP Registry
+# MCP ACS Screenshot Server - Docker MCP Registry
 
 ## Quick Start
 
@@ -165,9 +165,9 @@ Recommended limits:
 
 ## Support
 
-- GitHub: https://github.com/digital-defiance/ai-capabilities-suite
-- Issues: https://github.com/digital-defiance/ai-capabilities-suite/issues
-- Email: info@digitaldefiance.org
+- GitHub: <https://github.com/digital-defiance/ai-capabilities-suite>
+- Issues: <https://github.com/digital-defiance/ai-capabilities-suite/issues>
+- Email: <info@digitaldefiance.org>
 
 ## License
 

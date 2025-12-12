@@ -1,4 +1,4 @@
-# MCP Screenshot v1.0.0 Release Checklist
+# MCP ACS Screenshot v1.0.0 Release Checklist
 
 ## Pre-Release
 
@@ -20,7 +20,7 @@ npm test
 npm publish --access public
 ```
 
-**Verify**: https://www.npmjs.com/package/@ai-capabilities-suite/mcp-screenshot
+**Verify**: <https://www.npmjs.com/package/@ai-capabilities-suite/mcp-screenshot>
 
 ### 2. Docker Image
 
@@ -29,7 +29,7 @@ npm publish --access public
 ./packages/mcp-screenshot/docker-build-push.sh --push
 ```
 
-**Verify**: https://hub.docker.com/r/digitaldefiance/mcp-screenshot/tags
+**Verify**: <https://hub.docker.com/r/digitaldefiance/mcp-screenshot/tags>
 
 ### 3. VSCode Extension
 
@@ -40,7 +40,7 @@ npm run package
 npm run publish
 ```
 
-**Verify**: https://marketplace.visualstudio.com/items?itemName=DigitalDefiance.mcp-screenshot
+**Verify**: <https://marketplace.visualstudio.com/items?itemName=DigitalDefiance.mcp-screenshot>
 
 ### 4. Git Tag and GitHub Release
 
@@ -55,15 +55,15 @@ git push origin mcp-screenshot-v1.0.0
 
 Then create GitHub release:
 
-1. Go to https://github.com/digital-defiance/ai-capabilities-suite/releases/new
+1. Go to <https://github.com/digital-defiance/ai-capabilities-suite/releases/new>
 2. Tag: `mcp-screenshot-v1.0.0`
-3. Title: `MCP Screenshot v1.0.0`
+3. Title: `MCP ACS Screenshot v1.0.0`
 4. Description: Use release notes template below
 
 ## Release Notes Template
 
 ````markdown
-# MCP Screenshot v1.0.0
+# MCP ACS Screenshot v1.0.0
 
 ## 🎉 What's New
 
@@ -97,14 +97,14 @@ docker pull digitaldefiance/mcp-screenshot:1.0.0
 
 ### VSCode Extension
 
-Search "MCP Screenshot" in VS Code Extensions
+Search "MCP ACS Screenshot" in VS Code Extensions
 
 ## 🔗 Links
 
-- NPM: https://www.npmjs.com/package/@ai-capabilities-suite/mcp-screenshot
-- Docker Hub: https://hub.docker.com/r/digitaldefiance/mcp-screenshot
-- VSCode Marketplace: https://marketplace.visualstudio.com/items?itemName=DigitalDefiance.mcp-screenshot
-- Documentation: https://github.com/digital-defiance/ai-capabilities-suite/tree/main/packages/mcp-screenshot
+- NPM: <https://www.npmjs.com/package/@ai-capabilities-suite/mcp-screenshot>
+- Docker Hub: <https://hub.docker.com/r/digitaldefiance/mcp-screenshot>
+- VSCode Marketplace: <https://marketplace.visualstudio.com/items?itemName=DigitalDefiance.mcp-screenshot>
+- Documentation: <https://github.com/digital-defiance/ai-capabilities-suite/tree/main/packages/mcp-screenshot>
 
 ## 📝 Full Changelog
 
@@ -118,7 +118,7 @@ Search "MCP Screenshot" in VS Code Extensions
 - Docker MCP Registry submission files with correct image names
 - Version management automation
 
-**Full Changelog**: https://github.com/digital-defiance/ai-capabilities-suite/compare/mcp-screenshot-v0.0.2...mcp-screenshot-v1.0.0
+**Full Changelog**: <https://github.com/digital-defiance/ai-capabilities-suite/compare/mcp-screenshot-v0.0.2...mcp-screenshot-v1.0.0>
 
 ````
 

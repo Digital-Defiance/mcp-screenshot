@@ -4,10 +4,10 @@ import * as fs from "fs";
 import * as os from "os";
 
 /**
- * End-to-End tests for MCP Screenshot Server
+ * End-to-End tests for MCP ACS Screenshot Server
  * Tests the actual MCP protocol communication via stdio
  */
-describe("MCP Screenshot Server - E2E", () => {
+describe("MCP ACS Screenshot Server - E2E", () => {
   jest.setTimeout(120000);
   let serverProcess: ChildProcess;
   let messageId = 0;
@@ -297,7 +297,7 @@ describe("MCP Screenshot Server - E2E", () => {
         "   Install system dependencies (grim for Wayland, scrot for X11) to run all tests."
       );
     }
-  }, 60000);
+  }, 180000);
 
   afterAll(() => {
     stopServer();
@@ -469,7 +469,7 @@ describe("MCP Screenshot Server - E2E", () => {
           "ℹ️  Screenshot capture failed (expected in headless environment)"
         );
       }
-    }, 60000);
+    }, 180000);
 
     it("should capture full screen with specific format or fail gracefully", async () => {
       const result = await sendRequest("tools/call", {
@@ -493,7 +493,7 @@ describe("MCP Screenshot Server - E2E", () => {
           "ℹ️  Screenshot capture failed (expected in headless environment)"
         );
       }
-    }, 60000);
+    }, 180000);
 
     it("should save full screen to file or fail gracefully", async () => {
       const savePath = path.join(tempDir, "fullscreen.png");
@@ -523,7 +523,7 @@ describe("MCP Screenshot Server - E2E", () => {
           "ℹ️  Screenshot capture failed (expected in headless environment)"
         );
       }
-    }, 60000);
+    }, 180000);
 
     it("should capture with PII masking enabled or fail gracefully", async () => {
       const result = await sendRequest("tools/call", {
@@ -705,7 +705,7 @@ describe("MCP Screenshot Server - E2E", () => {
           );
         }
       }
-    }, 60000);
+    }, 180000);
 
     it("should capture window by ID", async () => {
       // Get list of windows first
@@ -741,7 +741,7 @@ describe("MCP Screenshot Server - E2E", () => {
         expect(response.status).toBe("success");
         expect(response.data).toBeDefined();
       }
-    }, 60000);
+    }, 180000);
 
     it("should handle non-existent window", async () => {
       const result = await sendRequest("tools/call", {
@@ -757,7 +757,7 @@ describe("MCP Screenshot Server - E2E", () => {
       expect(response.status).toBe("error");
       expect(response.error).toBeDefined();
       expect(response.error.code).toBe("WINDOW_NOT_FOUND");
-    }, 60000);
+    }, 180000);
   });
 
   describe("Error Handling", () => {

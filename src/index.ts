@@ -1,5 +1,5 @@
 /**
- * MCP Screenshot Server
+ * MCP ACS Screenshot Server
  * Main entry point
  */
 

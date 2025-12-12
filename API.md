@@ -1,6 +1,6 @@
-# MCP Screenshot - API Documentation
+# MCP ACS Screenshot - API Documentation
 
-This document provides comprehensive API documentation for the MCP Screenshot server, including error codes, platform-specific behavior, and type definitions.
+This document provides comprehensive API documentation for the MCP ACS Screenshot server, including error codes, platform-specific behavior, and type definitions.
 
 ## Table of Contents
 
@@ -11,7 +11,7 @@ This document provides comprehensive API documentation for the MCP Screenshot se
 
 ## Error Codes
 
-All errors returned by the MCP Screenshot server follow a structured format with error codes and remediation suggestions.
+All errors returned by the MCP ACS Screenshot server follow a structured format with error codes and remediation suggestions.
 
 ### Error Code Reference
 
@@ -49,6 +49,7 @@ All errors follow this structure:
 ### Example Error Responses
 
 **Window Not Found:**
+
 ```json
 {
   "status": "error",
@@ -64,6 +65,7 @@ All errors follow this structure:
 ```
 
 **Rate Limit Exceeded:**
+
 ```json
 {
   "status": "error",
@@ -81,6 +83,7 @@ All errors follow this structure:
 ```
 
 **Invalid Path:**
+
 ```json
 {
   "status": "error",
@@ -98,19 +101,22 @@ All errors follow this structure:
 
 ## Platform-Specific Behavior
 
-The MCP Screenshot server adapts to different operating systems with platform-specific implementations.
+The MCP ACS Screenshot server adapts to different operating systems with platform-specific implementations.
 
 ### Linux
 
 **Display Servers:**
+
 - **X11**: Uses `import` or `xwd` commands from ImageMagick
 - **Wayland**: Uses `grim` command
 
 **Detection:**
+
 - Automatically detects display server from `$DISPLAY` and `$WAYLAND_DISPLAY` environment variables
 - Falls back to X11 if both are present
 
 **Requirements:**
+
 ```bash
 # X11
 sudo apt-get install imagemagick
@@ -120,15 +126,18 @@ sudo apt-get install grim
 ```
 
 **Multi-Monitor:**
+
 - Supports multi-monitor setups through X11 RandR or Wayland output protocols
 - Display IDs correspond to X11 screen numbers or Wayland output names
 
 **Window Capture:**
+
 - Uses `xdotool` for window enumeration on X11
 - Uses `swaymsg` for window enumeration on Wayland (Sway compositor)
 - Window IDs are X11 window IDs (hexadecimal) or Wayland app IDs
 
 **Limitations:**
+
 - Wayland support depends on compositor (works with Sway, may not work with GNOME/KDE)
 - Some Wayland compositors require additional permissions
 - Window frame inclusion may not work consistently across all window managers
@@ -136,29 +145,35 @@ sudo apt-get install grim
 ### macOS
 
 **Capture Method:**
+
 - Uses native `screencapture` command
 - Supports all macOS versions with `screencapture` utility
 
 **Permissions:**
+
 - Requires Screen Recording permission in System Preferences > Security & Privacy > Privacy > Screen Recording
 - Permission must be granted to the terminal application or Node.js
 
 **Retina Displays:**
+
 - Automatically handles Retina display scaling
 - Captured images have 2x resolution on Retina displays
 - Metadata reports actual pixel dimensions
 
 **Multi-Monitor:**
+
 - Supports multi-monitor setups
 - Display IDs correspond to macOS display numbers
 - Primary display is the one with the menu bar
 
 **Window Capture:**
+
 - Uses `osascript` (AppleScript) for window enumeration
 - Window IDs are macOS window numbers
 - Window frame inclusion uses `-o` flag with `screencapture`
 
 **Limitations:**
+
 - Window capture may include shadows (macOS behavior)
 - Some system windows cannot be captured (security restriction)
 - Permission dialogs cannot be captured
@@ -166,29 +181,35 @@ sudo apt-get install grim
 ### Windows
 
 **Capture Method:**
+
 - Uses `screenshot-desktop` npm library
 - Leverages Windows Graphics Capture API
 
 **Permissions:**
+
 - No special permissions required for most operations
 - Administrator privileges may be required for some system windows
 
 **High-DPI:**
+
 - Automatically handles high-DPI displays
 - Scaling factor is applied correctly
 - Metadata reports actual pixel dimensions
 
 **Multi-Monitor:**
+
 - Supports multi-monitor setups
 - Display IDs correspond to Windows display numbers
 - Primary display is the one with the taskbar
 
 **Window Capture:**
+
 - Uses Windows API for window enumeration
 - Window IDs are Windows HWND handles (decimal)
 - Window frame inclusion captures title bar and borders
 
 **Limitations:**
+
 - Some UWP apps may not be capturable
 - Windows Defender may block captures of security-sensitive windows
 - Elevated windows require elevated privileges to capture
@@ -303,7 +324,7 @@ Main server class that implements the MCP protocol.
 ```typescript
 class MCPScreenshotServer {
   /**
-   * Create a new MCP Screenshot server
+   * Create a new MCP ACS Screenshot server
    * 
    * @param securityPolicy - Optional security policy configuration
    * @param excludedWindowPatterns - Optional window title patterns to exclude

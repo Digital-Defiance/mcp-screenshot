@@ -1,4 +1,4 @@
-# Dockerfile for MCP Screenshot Server
+# Dockerfile for MCP ACS Screenshot Server
 # Installs the published NPM package
 
 FROM node:20-alpine
@@ -41,7 +41,7 @@ RUN addgroup -g 1001 -S mcp && \
 WORKDIR /app
 
 # Install the published package from NPM
-RUN npm install -g @ai-capabilities-suite/mcp-screenshot@1.5.22
+RUN npm install -g @ai-capabilities-suite/mcp-screenshot@1.5.23
 
 # Copy Tesseract data
 COPY --chown=mcp:mcp eng.traineddata /usr/share/tessdata/
@@ -77,7 +77,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD node -e "process.exit(0)" || exit 1
 
 # Labels for metadata
-LABEL org.opencontainers.image.title="MCP Screenshot Server" \
+LABEL org.opencontainers.image.title="MCP ACS Screenshot Server" \
       org.opencontainers.image.description="Enterprise-grade MCP server for screenshot capture and processing" \
       org.opencontainers.image.vendor="Digital Defiance" \
       org.opencontainers.image.authors="Jessica Mulein <jessica@digitaldefiance.org>" \

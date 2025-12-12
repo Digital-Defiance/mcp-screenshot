@@ -1,5 +1,5 @@
 /**
- * MCP Screenshot Server
+ * MCP ACS Screenshot Server
  * Main server implementation
  */
 
@@ -14,7 +14,7 @@ import { MCPTools } from "./tools";
 import { SecurityPolicy } from "./types";
 
 /**
- * MCP Screenshot Server class
+ * MCP ACS Screenshot Server class
  */
 export class MCPScreenshotServer {
   private server: Server;
@@ -29,7 +29,7 @@ export class MCPScreenshotServer {
     this.server = new Server(
       {
         name: "mcp-screenshot",
-        version: "1.5.22",
+        version: "1.5.23",
       },
       {
         capabilities: {
@@ -291,7 +291,7 @@ export class MCPScreenshotServer {
     await this.server.connect(transport);
     this.isRunning = true;
 
-    console.error("MCP Screenshot Server started successfully");
+    console.error("MCP ACS Screenshot Server started successfully");
   }
 
   /**
@@ -306,7 +306,7 @@ export class MCPScreenshotServer {
     await this.server.close();
     this.isRunning = false;
 
-    console.error("MCP Screenshot Server stopped");
+    console.error("MCP ACS Screenshot Server stopped");
   }
 
   /**

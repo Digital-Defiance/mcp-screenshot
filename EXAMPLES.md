@@ -1,6 +1,6 @@
-# MCP Screenshot - Usage Examples
+# MCP ACS Screenshot - Usage Examples
 
-This document provides comprehensive examples for using the MCP Screenshot server with AI agents.
+This document provides comprehensive examples for using the MCP ACS Screenshot server with AI agents.
 
 ## Table of Contents
 
@@ -101,6 +101,7 @@ Then configure:
 > "Take a screenshot of my entire screen and save it as screenshot.png"
 
 **AI Agent Action:**
+
 ```json
 {
   "tool": "screenshot_capture_full",
@@ -112,6 +113,7 @@ Then configure:
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -141,6 +143,7 @@ Then configure:
 **AI Agent Actions:**
 
 1. First, list windows:
+
 ```json
 {
   "tool": "screenshot_list_windows",
@@ -149,6 +152,7 @@ Then configure:
 ```
 
 2. Then capture the VS Code window:
+
 ```json
 {
   "tool": "screenshot_capture_window",
@@ -166,6 +170,7 @@ Then configure:
 > "Capture the top-left corner of my screen, 800x600 pixels"
 
 **AI Agent Action:**
+
 ```json
 {
   "tool": "screenshot_capture_region",
@@ -187,6 +192,7 @@ Then configure:
 > "Take a high-quality screenshot and save it as a JPEG with 90% quality"
 
 **AI Agent Action:**
+
 ```json
 {
   "tool": "screenshot_capture_full",
@@ -204,6 +210,7 @@ Then configure:
 > "Take a screenshot but mask any sensitive information like emails or phone numbers"
 
 **AI Agent Action:**
+
 ```json
 {
   "tool": "screenshot_capture_full",
@@ -216,6 +223,7 @@ Then configure:
 ```
 
 **Response with Masking Stats:**
+
 ```json
 {
   "status": "success",
@@ -244,6 +252,7 @@ Then configure:
 **AI Agent Actions:**
 
 1. List displays:
+
 ```json
 {
   "tool": "screenshot_list_displays",
@@ -252,6 +261,7 @@ Then configure:
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -275,6 +285,7 @@ Then configure:
 ```
 
 2. Capture secondary display:
+
 ```json
 {
   "tool": "screenshot_capture_full",
@@ -292,6 +303,7 @@ Then configure:
 > "Take a screenshot and return it as base64 data"
 
 **AI Agent Action:**
+
 ```json
 {
   "tool": "screenshot_capture_full",
@@ -302,6 +314,7 @@ Then configure:
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -323,6 +336,7 @@ Then configure:
 > "Capture my browser window including the title bar and borders"
 
 **AI Agent Action:**
+
 ```json
 {
   "tool": "screenshot_capture_window",
@@ -340,6 +354,7 @@ Then configure:
 > "Take a screenshot in WebP format to save space"
 
 **AI Agent Action:**
+
 ```json
 {
   "tool": "screenshot_capture_full",
@@ -357,6 +372,7 @@ Then configure:
 > "Capture a 1000x800 region starting at position (2000, 100)"
 
 **AI Agent Action:**
+
 ```json
 {
   "tool": "screenshot_capture_region",
@@ -390,6 +406,7 @@ Create `security-policy.json`:
 ```
 
 **Attempting to save outside allowed directories:**
+
 ```json
 {
   "tool": "screenshot_capture_full",
@@ -401,6 +418,7 @@ Create `security-policy.json`:
 ```
 
 **Error Response:**
+
 ```json
 {
   "status": "error",
@@ -482,6 +500,7 @@ services:
 ```
 
 Run:
+
 ```bash
 docker-compose up -d
 ```
@@ -609,6 +628,7 @@ DISPLAY=:0 mcp-screenshot
 ### macOS Screen Recording Permission
 
 On macOS, grant screen recording permission:
+
 1. System Preferences → Security & Privacy → Privacy
 2. Select "Screen Recording"
 3. Add Terminal or your application
@@ -629,6 +649,7 @@ For high-DPI displays on Windows, ensure proper scaling:
 ## Support
 
 For issues, questions, or contributions:
-- GitHub: https://github.com/digital-defiance/ai-capabilities-suite
-- Issues: https://github.com/digital-defiance/ai-capabilities-suite/issues
-- Email: info@digitaldefiance.org
+
+- GitHub: <https://github.com/digital-defiance/ai-capabilities-suite>
+- Issues: <https://github.com/digital-defiance/ai-capabilities-suite/issues>
+- Email: <info@digitaldefiance.org>

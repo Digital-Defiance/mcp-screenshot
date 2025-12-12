@@ -1,6 +1,6 @@
-# NPM Publishing Guide - MCP Screenshot
+# NPM Publishing Guide - MCP ACS Screenshot
 
-This guide covers the complete process for publishing the MCP Screenshot packages to NPM, including setup, manual publishing, and automated workflows.
+This guide covers the complete process for publishing the MCP ACS Screenshot packages to NPM, including setup, manual publishing, and automated workflows.
 
 ## Table of Contents
 
@@ -28,12 +28,14 @@ Before publishing to NPM, ensure you have:
 ### 1. NPM Account Configuration
 
 #### Create NPM Account
+
 ```bash
 # If you don't have an account, create one
 npm adduser
 ```
 
 #### Login to NPM
+
 ```bash
 # Login to your NPM account
 npm login
@@ -43,6 +45,7 @@ npm whoami
 ```
 
 #### Enable Two-Factor Authentication
+
 1. Go to [npmjs.com/settings/profile](https://www.npmjs.com/settings/profile)
 2. Navigate to "Two-Factor Authentication"
 3. Enable 2FA for "Authorization and Publishing"
@@ -99,6 +102,7 @@ Check that `package.json` is properly configured:
 ### Pre-Publishing Steps
 
 1. **Update Version Number**
+
    ```bash
    # Update version in package.json
    cd packages/mcp-screenshot
@@ -106,6 +110,7 @@ Check that `package.json` is properly configured:
    ```
 
 2. **Clean and Build**
+
    ```bash
    # From repository root
    yarn clean
@@ -114,6 +119,7 @@ Check that `package.json` is properly configured:
    ```
 
 3. **Run Tests**
+
    ```bash
    # Run full test suite
    cd packages/mcp-screenshot
@@ -124,6 +130,7 @@ Check that `package.json` is properly configured:
    ```
 
 4. **Verify Package Contents**
+
    ```bash
    # Dry run to see what will be published
    cd packages/mcp-screenshot
@@ -295,6 +302,7 @@ Use this checklist before each publish:
 #### Issue: "You must be logged in to publish packages"
 
 **Solution:**
+
 ```bash
 npm login
 npm whoami  # Verify login
@@ -303,11 +311,13 @@ npm whoami  # Verify login
 #### Issue: "You do not have permission to publish"
 
 **Causes:**
+
 - Not a member of the `@ai-capabilities-suite` organization
 - Package name already taken
 - 2FA not configured
 
 **Solutions:**
+
 ```bash
 # Check organization membership
 npm org ls @ai-capabilities-suite
@@ -318,6 +328,7 @@ npm org ls @ai-capabilities-suite
 #### Issue: "Version already exists"
 
 **Solution:**
+
 ```bash
 # Increment version
 npm version patch
@@ -328,11 +339,13 @@ npm version patch
 #### Issue: "npm ERR! 403 Forbidden"
 
 **Causes:**
+
 - Invalid NPM token
 - Token expired
 - Insufficient permissions
 
 **Solutions:**
+
 1. Generate new NPM token
 2. Update GitHub secret `NPM_TOKEN`
 3. Verify token has publish permissions
@@ -340,12 +353,14 @@ npm version patch
 #### Issue: "Native dependencies fail to install"
 
 **Causes:**
+
 - Missing system dependencies (sharp, screenshot-desktop)
 - Platform-specific build tools not installed
 
 **Solutions:**
 
 **Linux:**
+
 ```bash
 # Install build tools
 sudo apt-get install build-essential libx11-dev libxext-dev libxrandr-dev
@@ -355,6 +370,7 @@ sudo apt-get install libvips-dev
 ```
 
 **macOS:**
+
 ```bash
 # Install Xcode Command Line Tools
 xcode-select --install
@@ -364,6 +380,7 @@ brew install vips
 ```
 
 **Windows:**
+
 ```bash
 # Install windows-build-tools
 npm install --global windows-build-tools
@@ -372,10 +389,12 @@ npm install --global windows-build-tools
 #### Issue: "Screenshot capture fails in tests"
 
 **Causes:**
+
 - No display server available (headless environment)
 - Insufficient permissions
 
 **Solutions:**
+
 ```bash
 # Linux - use xvfb for headless testing
 xvfb-run npm test
@@ -429,6 +448,7 @@ node -e "const mcp = require('@ai-capabilities-suite/mcp-screenshot'); console.l
 After publishing:
 
 1. **Update README badges**:
+
    ```markdown
    ![npm version](https://img.shields.io/npm/v/@ai-capabilities-suite/mcp-screenshot)
    ![npm downloads](https://img.shields.io/npm/dm/@ai-capabilities-suite/mcp-screenshot)
@@ -452,9 +472,10 @@ After publishing:
 After publishing, monitor:
 
 1. **NPM Package Page**:
-   - https://www.npmjs.com/package/@ai-capabilities-suite/mcp-screenshot
+   - <https://www.npmjs.com/package/@ai-capabilities-suite/mcp-screenshot>
 
 2. **Download Stats**:
+
    ```bash
    npm info @ai-capabilities-suite/mcp-screenshot
    ```
@@ -462,6 +483,7 @@ After publishing, monitor:
 3. **GitHub Issues**: Watch for bug reports
 
 4. **Security Alerts**:
+
    ```bash
    npm audit
    ```
@@ -469,16 +491,19 @@ After publishing, monitor:
 ## Platform-Specific Considerations
 
 ### Linux
+
 - Requires X11 or Wayland
 - May need additional permissions for screen capture
 - Test on multiple distributions (Ubuntu, Fedora, Arch)
 
 ### macOS
+
 - Requires screen recording permissions
 - Test on both Intel and Apple Silicon
 - Verify code signing if applicable
 
 ### Windows
+
 - Test on Windows 10 and 11
 - Verify both x64 and ARM64 if supported
 - Check Windows Defender compatibility

@@ -1,13 +1,13 @@
 #!/bin/bash
 set -e
 
-# Docker Build and Push Script for MCP Screenshot
-# This script builds and pushes the MCP Screenshot Server Docker image
+# Docker Build and Push Script for MCP ACS Screenshot
+# This script builds and pushes the MCP ACS Screenshot Server Docker image
 
-VERSION="1.5.22"
+VERSION="1.5.23"
 IMAGE_NAME="digitaldefiance/mcp-screenshot"
 
-echo "🐳 Building Docker image for MCP Screenshot..."
+echo "🐳 Building Docker image for MCP ACS Screenshot..."
 echo "Version: $VERSION"
 echo "Image: $IMAGE_NAME"
 echo ""
